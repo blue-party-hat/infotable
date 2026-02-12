@@ -7,20 +7,19 @@
 
   <style>
     :root{
-      --bg:#0a0e1a;
-      --panel:#111827;
-      --panel2:#1a1f35;
-      --text:#f0f0f0;
-      --muted:#9ca3af;
-      --border:rgba(99,102,241,.2);
-      --accent:#6366f1;
-      --accent-hover:#818cf8;
-      --accent-glow:rgba(99,102,241,.4);
-      --orange:#f59e0b;
-      --purple:#a855f7;
-      --cyan:#06b6d4;
-      --green:#10b981;
-      --card-bg:linear-gradient(135deg, #1a1f35 0%, #0f1421 100%);
+      --bg:#0f0f0f;
+      --panel:#1a1a1a;
+      --panel2:#212121;
+      --text:#e0e0e0;
+      --muted:#8a8a8a;
+      --border:rgba(180,180,180,.15);
+      --accent:#d4af37;
+      --accent-hover:#f0c857;
+      --accent-glow:rgba(212,175,55,.3);
+      --silver:#c0c0c0;
+      --gold:#d4af37;
+      --graphite:#2a2a2a;
+      --card-bg:linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
     }
     *{box-sizing:border-box}
     body{
@@ -28,21 +27,21 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
       background:var(--bg);
       color:var(--text);
-      line-height:1.5;
+      line-height:1.4;
     }
     .topbar{
       position:sticky; top:0; z-index:50;
       display:flex; align-items:center; gap:12px;
-      padding:12px 16px;
-      background:rgba(17,24,39,.95);
-      border-bottom:2px solid var(--border);
+      padding:10px 16px;
+      background:rgba(26,26,26,.98);
+      border-bottom:1px solid var(--border);
       backdrop-filter: blur(12px);
-      box-shadow:0 4px 12px rgba(0,0,0,.3);
+      box-shadow:0 2px 8px rgba(0,0,0,.5);
     }
     .icon-btn{
       border:1px solid var(--border);
       background:transparent; color:var(--text);
-      padding:8px 12px; border-radius:8px; font-size:18px;
+      padding:7px 11px; border-radius:6px; font-size:16px;
       cursor:pointer;
       transition: all .2s;
     }
@@ -52,174 +51,178 @@
     }
     .brand{
       font-weight:700; 
-      font-size:18px;
-      background:linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
+      font-size:17px;
+      background:linear-gradient(135deg, var(--gold) 0%, var(--silver) 100%);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       background-clip:text;
     }
     .spacer{flex:1}
-    .lang{display:flex; gap:8px}
+    .lang{display:flex; gap:6px}
     .lang-btn{
       border:1px solid var(--border);
       background:transparent; color:var(--text);
-      padding:6px 14px; border-radius:20px;
+      padding:5px 12px; border-radius:16px;
       cursor:pointer;
-      font-size:13px;
+      font-size:12px;
       font-weight:500;
       transition: all .2s;
     }
     .lang-btn:hover{
       border-color:var(--accent-hover);
-      background:rgba(99,102,241,.1);
+      background:rgba(212,175,55,.1);
     }
     .lang-btn.active{
       border-color:var(--accent);
       background:var(--accent);
-      color:#fff;
-      box-shadow:0 0 12px var(--accent-glow);
+      color:#000;
+      box-shadow:0 0 10px var(--accent-glow);
+      font-weight:600;
     }
 
-    .layout{display:flex; min-height:calc(100vh - 60px)}
+    .layout{display:flex; min-height:calc(100vh - 52px)}
     .sidebar{
-      width:240px; padding:12px;
+      width:220px; padding:10px;
       background:var(--panel);
-      border-right:2px solid var(--border);
+      border-right:1px solid var(--border);
     }
     .nav-item{
       width:100%; text-align:left;
-      padding:10px 14px; border-radius:10px;
+      padding:9px 12px; border-radius:8px;
       border:1px solid transparent;
       background:transparent; color:var(--text);
       cursor:pointer;
-      margin-bottom:6px;
-      font-weight:500;
-      transition: all .2s;
-    }
-    .nav-item:hover{
-      border-color:var(--border); 
-      background:rgba(99,102,241,.08);
-    }
-    .nav-item.active{
-      border-color:var(--accent); 
-      background:var(--accent);
-      color:#fff;
-      box-shadow:0 0 16px var(--accent-glow);
-    }
-
-    .main{flex:1; min-width:0; padding:16px}
-    .tabs{
-      display:flex; gap:8px; flex-wrap:wrap;
-      padding-bottom:12px; border-bottom:2px solid var(--border);
-      margin-bottom:16px; min-height:40px; align-items:center;
-    }
-    .tab{
-      border:1px solid var(--border);
-      background:rgba(26,31,53,.6); color:var(--text);
-      padding:8px 16px; border-radius:20px;
-      cursor:pointer;
+      margin-bottom:5px;
       font-weight:500;
       font-size:14px;
       transition: all .2s;
     }
+    .nav-item:hover{
+      border-color:var(--border); 
+      background:rgba(212,175,55,.08);
+    }
+    .nav-item.active{
+      border-color:var(--accent); 
+      background:var(--accent);
+      color:#000;
+      box-shadow:0 0 12px var(--accent-glow);
+      font-weight:600;
+    }
+
+    .main{flex:1; min-width:0; padding:14px}
+    .tabs{
+      display:flex; gap:6px; flex-wrap:wrap;
+      padding-bottom:10px; border-bottom:1px solid var(--border);
+      margin-bottom:14px; min-height:36px; align-items:center;
+    }
+    .tab{
+      border:1px solid var(--border);
+      background:rgba(42,42,42,.6); color:var(--text);
+      padding:7px 14px; border-radius:16px;
+      cursor:pointer;
+      font-weight:500;
+      font-size:13px;
+      transition: all .2s;
+    }
     .tab:hover{
       border-color:var(--accent-hover);
-      background:rgba(99,102,241,.15);
+      background:rgba(212,175,55,.12);
     }
     .tab.active{
       border-color:var(--accent); 
       background:var(--accent);
-      color:#fff;
-      box-shadow:0 0 12px var(--accent-glow);
+      color:#000;
+      box-shadow:0 0 10px var(--accent-glow);
+      font-weight:600;
     }
 
     .content{
       background:var(--card-bg);
       border:1px solid var(--border);
-      border-radius:16px;
-      padding:20px;
-      box-shadow:0 4px 20px rgba(0,0,0,.3);
+      border-radius:12px;
+      padding:16px;
+      box-shadow:0 3px 15px rgba(0,0,0,.4);
     }
     .content h2{
-      margin:0 0 8px; 
-      font-size:22px;
-      background:linear-gradient(135deg, var(--cyan) 0%, var(--accent) 100%);
+      margin:0 0 6px; 
+      font-size:20px;
+      background:linear-gradient(135deg, var(--gold) 0%, var(--silver) 100%);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       background-clip:text;
     }
-    .content p{margin:0 0 12px; color:var(--muted); line-height:1.6; font-size:14px;}
+    .content p{margin:0 0 10px; color:var(--muted); line-height:1.5; font-size:13px;}
 
     .gear-hero{
       display:flex;
       align-items:center;
-      gap:20px;
-      margin-bottom:20px;
-      padding:16px;
-      background:rgba(26,31,53,.6);
+      gap:16px;
+      margin-bottom:16px;
+      padding:12px;
+      background:rgba(42,42,42,.6);
       border:1px solid var(--border);
-      border-radius:12px;
+      border-radius:10px;
     }
     .gear-hero img{
-      width:100px;
-      height:100px;
+      width:90px;
+      height:90px;
       object-fit:contain;
-      border-radius:10px;
-      background:rgba(0,0,0,.3);
-      border:2px solid var(--border);
+      border-radius:8px;
+      background:rgba(0,0,0,.4);
+      border:1px solid var(--border);
     }
     .gear-hero-text h3{
-      margin:0 0 4px;
-      font-size:20px;
-      color:var(--orange);
+      margin:0 0 3px;
+      font-size:18px;
+      color:var(--gold);
     }
     .gear-hero-text p{
       margin:0;
       color:var(--muted);
-      font-size:13px;
+      font-size:12px;
     }
 
     .grid{
       display:grid;
       grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap:16px;
+      gap:12px;
     }
     .card{
       grid-column: span 12;
       border:1px solid var(--border);
-      background:rgba(26,31,53,.4);
-      border-radius:12px;
+      background:rgba(42,42,42,.4);
+      border-radius:10px;
       overflow:hidden;
-      box-shadow:0 2px 12px rgba(0,0,0,.2);
+      box-shadow:0 2px 10px rgba(0,0,0,.3);
     }
     .card-h{
       display:flex; align-items:center; justify-content:space-between;
-      padding:12px 16px;
-      background:rgba(99,102,241,.08);
+      padding:9px 12px;
+      background:rgba(212,175,55,.08);
       border-bottom:1px solid var(--border);
-      gap:10px;
+      gap:8px;
     }
     .card-title{
       font-weight:600;
-      font-size:15px;
+      font-size:14px;
       color:var(--accent-hover);
     }
     .badge{
-      font-size:11px; 
+      font-size:10px; 
       color:var(--muted);
       border:1px solid var(--border);
-      padding:3px 10px; 
-      border-radius:12px;
+      padding:2px 8px; 
+      border-radius:10px;
       white-space:nowrap;
-      background:rgba(0,0,0,.3);
+      background:rgba(0,0,0,.4);
     }
-    .card-b{padding:16px}
+    .card-b{padding:12px}
 
     .table-wrap{
       overflow:auto; 
       border:1px solid var(--border); 
-      border-radius:8px; 
-      background:rgba(10,14,26,.5);
+      border-radius:6px; 
+      background:rgba(15,15,15,.6);
     }
     table{
       border-collapse:collapse; 
@@ -227,25 +230,26 @@
       min-width:400px;
     }
     th,td{
-      padding:6px 10px; 
-      border-bottom:1px solid rgba(99,102,241,.1); 
+      padding:4px 8px; 
+      border-bottom:1px solid rgba(180,180,180,.08); 
       white-space:nowrap;
       text-align:left;
-      font-size:13px;
+      font-size:12px;
     }
     th{
-      background:rgba(26,31,53,.8);
-      color:var(--cyan);
-      font-size:12px;
+      background:rgba(42,42,42,.9);
+      color:var(--silver);
+      font-size:11px;
       font-weight:600;
       text-transform:uppercase;
-      letter-spacing:0.5px;
+      letter-spacing:0.3px;
       position:sticky;
       top:0;
       z-index:1;
+      padding:6px 8px;
     }
     tbody tr:hover td{
-      background:rgba(99,102,241,.08);
+      background:rgba(212,175,55,.08);
     }
     td.num, th.num{
       text-align:right; 
@@ -254,8 +258,8 @@
 
     @media (max-width: 980px){
       .sidebar{
-        position:fixed; top:60px; left:0;
-        height:calc(100vh - 60px);
+        position:fixed; top:52px; left:0;
+        height:calc(100vh - 52px);
         transform:translateX(-105%);
         transition:transform .25s ease;
         z-index:45;
@@ -263,15 +267,15 @@
       body.sidebar-open .sidebar{transform:translateX(0)}
       .backdrop{
         position:fixed; inset:0; z-index:40;
-        background:rgba(0,0,0,.7);
+        background:rgba(0,0,0,.8);
         backdrop-filter:blur(4px);
       }
       .layout{display:block}
-      .main{padding:12px}
+      .main{padding:10px}
       .card{grid-column: span 12}
       table{min-width:350px}
       .gear-hero{flex-direction:column; text-align:center}
-      .gear-hero img{width:80px; height:80px}
+      .gear-hero img{width:70px; height:70px}
     }
     @media (min-width: 980px){
       .card.span6{grid-column: span 6}
@@ -311,6 +315,344 @@
     // ========== EMBEDDED DATA ==========
     const ORANGE_D5_DATA = {"weapon":{"hex_levels":["1","2","3","4","5"],"power":[382768,462330,541838,621402,700911],"basic":{"hero_atk":[5403,5838,6183,6528,6873],"hero_atk_pct":[5.3,5.6,5.9,6.2,6.5]},"enhancement":[{"Enhancement Level":0,"Alloy":null,"Hero ATK":1069,"Hero ATK%":2.0},{"Enhancement Level":1,"Alloy":5000.0,"Hero ATK":1787,"Hero ATK%":2.06},{"Enhancement Level":2,"Alloy":5000.0,"Hero ATK":1836,"Hero ATK%":2.12},{"Enhancement Level":3,"Alloy":5000.0,"Hero ATK":1885,"Hero ATK%":2.18},{"Enhancement Level":4,"Alloy":5000.0,"Hero ATK":1074,"Hero ATK%":2.24},{"Enhancement Level":5,"Alloy":7000.0,"Hero ATK":2043,"Hero ATK%":2.3},{"Enhancement Level":6,"Alloy":7000.0,"Hero ATK":2112,"Hero ATK%":2.36},{"Enhancement Level":7,"Alloy":7000.0,"Hero ATK":2181,"Hero ATK%":2.42},{"Enhancement Level":8,"Alloy":7000.0,"Hero ATK":2249,"Hero ATK%":2.48},{"Enhancement Level":9,"Alloy":7000.0,"Hero ATK":2318,"Hero ATK%":2.54},{"Enhancement Level":10,"Alloy":10000.0,"Hero ATK":2387,"Hero ATK%":2.6},{"Enhancement Level":11,"Alloy":10000.0,"Hero ATK":2457,"Hero ATK%":2.66},{"Enhancement Level":12,"Alloy":10000.0,"Hero ATK":2526,"Hero ATK%":2.72},{"Enhancement Level":13,"Alloy":10000.0,"Hero ATK":2595,"Hero ATK%":2.78},{"Enhancement Level":14,"Alloy":10000.0,"Hero ATK":2664,"Hero ATK%":2.84},{"Enhancement Level":15,"Alloy":15000.0,"Hero ATK":2802,"Hero ATK%":2.9},{"Enhancement Level":16,"Alloy":15000.0,"Hero ATK":2871,"Hero ATK%":2.96},{"Enhancement Level":17,"Alloy":15000.0,"Hero ATK":2940,"Hero ATK%":3.02},{"Enhancement Level":18,"Alloy":15000.0,"Hero ATK":3009,"Hero ATK%":3.08},{"Enhancement Level":19,"Alloy":15000.0,"Hero ATK":3078,"Hero ATK%":3.14},{"Enhancement Level":20,"Alloy":20000.0,"Hero ATK":3147,"Hero ATK%":3.2},{"Enhancement Level":21,"Alloy":20000.0,"Hero ATK":3216,"Hero ATK%":3.26},{"Enhancement Level":22,"Alloy":20000.0,"Hero ATK":3285,"Hero ATK%":3.32},{"Enhancement Level":23,"Alloy":20000.0,"Hero ATK":3354,"Hero ATK%":3.38},{"Enhancement Level":24,"Alloy":20000.0,"Hero ATK":3423,"Hero ATK%":3.44},{"Enhancement Level":25,"Alloy":35000.0,"Hero ATK":3492,"Hero ATK%":3.5},{"Enhancement Level":26,"Alloy":35000.0,"Hero ATK":3561,"Hero ATK%":3.56},{"Enhancement Level":27,"Alloy":35000.0,"Hero ATK":3630,"Hero ATK%":3.62},{"Enhancement Level":28,"Alloy":35000.0,"Hero ATK":3699,"Hero ATK%":3.68},{"Enhancement Level":29,"Alloy":35000.0,"Hero ATK":3768,"Hero ATK%":3.74},{"Enhancement Level":30,"Alloy":70000.0,"Hero ATK":3837,"Hero ATK%":3.8},{"Enhancement Level":31,"Alloy":70000.0,"Hero ATK":3906,"Hero ATK%":3.86},{"Enhancement Level":32,"Alloy":70000.0,"Hero ATK":3975,"Hero ATK%":3.92},{"Enhancement Level":33,"Alloy":70000.0,"Hero ATK":4044,"Hero ATK%":3.98},{"Enhancement Level":34,"Alloy":70000.0,"Hero ATK":4113,"Hero ATK%":4.04},{"Enhancement Level":35,"Alloy":70000.0,"Hero ATK":4182,"Hero ATK%":4.1},{"Enhancement Level":36,"Alloy":70000.0,"Hero ATK":4251,"Hero ATK%":4.16},{"Enhancement Level":37,"Alloy":70000.0,"Hero ATK":4320,"Hero ATK%":4.22},{"Enhancement Level":38,"Alloy":70000.0,"Hero ATK":4389,"Hero ATK%":4.28},{"Enhancement Level":39,"Alloy":70000.0,"Hero ATK":4458,"Hero ATK%":4.34},{"Enhancement Level":40,"Alloy":70000.0,"Hero ATK":4527,"Hero ATK%":4.4},{"Enhancement Level":41,"Alloy":70000.0,"Hero ATK":4596,"Hero ATK%":4.46},{"Enhancement Level":42,"Alloy":70000.0,"Hero ATK":4665,"Hero ATK%":4.52},{"Enhancement Level":43,"Alloy":70000.0,"Hero ATK":4734,"Hero ATK%":4.58},{"Enhancement Level":44,"Alloy":70000.0,"Hero ATK":4803,"Hero ATK%":4.64},{"Enhancement Level":45,"Alloy":70000.0,"Hero ATK":4872,"Hero ATK%":4.7},{"Enhancement Level":46,"Alloy":70000.0,"Hero ATK":4941,"Hero ATK%":4.76},{"Enhancement Level":47,"Alloy":70000.0,"Hero ATK":5010,"Hero ATK%":4.82},{"Enhancement Level":48,"Alloy":70000.0,"Hero ATK":5079,"Hero ATK%":4.88},{"Enhancement Level":49,"Alloy":70000.0,"Hero ATK":5148,"Hero ATK%":4.94},{"Enhancement Level":50,"Alloy":150000.0,"Hero ATK":5217,"Hero ATK%":5.0},{"Enhancement Level":51,"Alloy":150000.0,"Hero ATK":5286,"Hero ATK%":5.06},{"Enhancement Level":52,"Alloy":150000.0,"Hero ATK":5355,"Hero ATK%":5.12},{"Enhancement Level":53,"Alloy":150000.0,"Hero ATK":5424,"Hero ATK%":5.18},{"Enhancement Level":54,"Alloy":150000.0,"Hero ATK":5493,"Hero ATK%":5.24},{"Enhancement Level":55,"Alloy":150000.0,"Hero ATK":5562,"Hero ATK%":5.3},{"Enhancement Level":56,"Alloy":150000.0,"Hero ATK":5631,"Hero ATK%":5.36},{"Enhancement Level":57,"Alloy":150000.0,"Hero ATK":5700,"Hero ATK%":5.42},{"Enhancement Level":58,"Alloy":150000.0,"Hero ATK":5769,"Hero ATK%":5.48},{"Enhancement Level":59,"Alloy":150000.0,"Hero ATK":5838,"Hero ATK%":5.54},{"Enhancement Level":60,"Alloy":150000.0,"Hero ATK":5907,"Hero ATK%":5.6},{"Enhancement Level":61,"Alloy":150000.0,"Hero ATK":5976,"Hero ATK%":5.66},{"Enhancement Level":62,"Alloy":150000.0,"Hero ATK":6045,"Hero ATK%":5.72},{"Enhancement Level":63,"Alloy":150000.0,"Hero ATK":6114,"Hero ATK%":5.78},{"Enhancement Level":64,"Alloy":150000.0,"Hero ATK":6183,"Hero ATK%":5.84},{"Enhancement Level":65,"Alloy":150000.0,"Hero ATK":6252,"Hero ATK%":5.9},{"Enhancement Level":66,"Alloy":150000.0,"Hero ATK":6321,"Hero ATK%":5.96},{"Enhancement Level":67,"Alloy":150000.0,"Hero ATK":6390,"Hero ATK%":6.02},{"Enhancement Level":68,"Alloy":150000.0,"Hero ATK":6459,"Hero ATK%":6.08},{"Enhancement Level":69,"Alloy":150000.0,"Hero ATK":6528,"Hero ATK%":6.14},{"Enhancement Level":70,"Alloy":300000.0,"Hero ATK":6597,"Hero ATK%":6.2},{"Enhancement Level":71,"Alloy":300000.0,"Hero ATK":6666,"Hero ATK%":6.26},{"Enhancement Level":72,"Alloy":300000.0,"Hero ATK":6735,"Hero ATK%":6.32},{"Enhancement Level":73,"Alloy":300000.0,"Hero ATK":6804,"Hero ATK%":6.38},{"Enhancement Level":74,"Alloy":300000.0,"Hero ATK":6873,"Hero ATK%":6.44},{"Enhancement Level":75,"Alloy":300000.0,"Hero ATK":6942,"Hero ATK%":6.5},{"Enhancement Level":76,"Alloy":300000.0,"Hero ATK":7011,"Hero ATK%":6.6},{"Enhancement Level":77,"Alloy":300000.0,"Hero ATK":7080,"Hero ATK%":6.7},{"Enhancement Level":78,"Alloy":300000.0,"Hero ATK":7149,"Hero ATK%":6.8},{"Enhancement Level":79,"Alloy":300000.0,"Hero ATK":7218,"Hero ATK%":6.9},{"Enhancement Level":80,"Alloy":300000.0,"Hero ATK":7287,"Hero ATK%":7.0},{"Enhancement Level":81,"Alloy":300000.0,"Hero ATK":7356,"Hero ATK%":7.1},{"Enhancement Level":82,"Alloy":300000.0,"Hero ATK":7425,"Hero ATK%":7.2},{"Enhancement Level":83,"Alloy":300000.0,"Hero ATK":7494,"Hero ATK%":7.3},{"Enhancement Level":84,"Alloy":300000.0,"Hero ATK":7563,"Hero ATK%":7.4},{"Enhancement Level":85,"Alloy":300000.0,"Hero ATK":7632,"Hero ATK%":7.5},{"Enhancement Level":86,"Alloy":300000.0,"Hero ATK":7701,"Hero ATK%":7.6},{"Enhancement Level":87,"Alloy":300000.0,"Hero ATK":7770,"Hero ATK%":7.7},{"Enhancement Level":88,"Alloy":300000.0,"Hero ATK":7839,"Hero ATK%":7.8},{"Enhancement Level":89,"Alloy":300000.0,"Hero ATK":7908,"Hero ATK%":7.9},{"Enhancement Level":90,"Alloy":450000.0,"Hero ATK":7977,"Hero ATK%":8.0},{"Enhancement Level":91,"Alloy":450000.0,"Hero ATK":8046,"Hero ATK%":8.2},{"Enhancement Level":92,"Alloy":450000.0,"Hero ATK":8115,"Hero ATK%":8.4},{"Enhancement Level":93,"Alloy":450000.0,"Hero ATK":8184,"Hero ATK%":8.6},{"Enhancement Level":94,"Alloy":450000.0,"Hero ATK":8253,"Hero ATK%":8.8},{"Enhancement Level":95,"Alloy":450000.0,"Hero ATK":8322,"Hero ATK%":9.0},{"Enhancement Level":96,"Alloy":450000.0,"Hero ATK":8391,"Hero ATK%":9.2},{"Enhancement Level":97,"Alloy":450000.0,"Hero ATK":8460,"Hero ATK%":9.4},{"Enhancement Level":98,"Alloy":450000.0,"Hero ATK":8529,"Hero ATK%":9.6},{"Enhancement Level":99,"Alloy":450000.0,"Hero ATK":8598,"Hero ATK%":9.8},{"Enhancement Level":100,"Alloy":450000.0,"Hero ATK":8667,"Hero ATK%":10.0}]},"helmet":{"hex_levels":["1","2","3","4","5"],"power":[380750,456075,508305,608120,765880],"basic":{"hero_atk":[3380,3592,3804,4017,4229],"hero_def":[1690,1796,1902,2008,2115],"hero_def_pct":[5.3,5.6,5.9,6.2,6.5]},"enhancement":[{"Enhancement Level":0,"Alloy":null,"Hero ATK":1045,"Hero DEF":522,"Hero ATK%":2.0},{"Enhancement Level":1,"Alloy":5000.0,"Hero ATK":1087,"Hero DEF":543,"Hero ATK%":2.06},{"Enhancement Level":2,"Alloy":5000.0,"Hero ATK":1129,"Hero DEF":564,"Hero ATK%":2.12},{"Enhancement Level":3,"Alloy":5000.0,"Hero ATK":1172,"Hero DEF":585,"Hero ATK%":2.18},{"Enhancement Level":4,"Alloy":5000.0,"Hero ATK":1214,"Hero DEF":606,"Hero ATK%":2.24},{"Enhancement Level":5,"Alloy":7000.0,"Hero ATK":1257,"Hero DEF":628,"Hero ATK%":2.3},{"Enhancement Level":6,"Alloy":7000.0,"Hero ATK":1299,"Hero DEF":649,"Hero ATK%":2.36},{"Enhancement Level":7,"Alloy":7000.0,"Hero ATK":1342,"Hero DEF":670,"Hero ATK%":2.42},{"Enhancement Level":8,"Alloy":7000.0,"Hero ATK":1384,"Hero DEF":691,"Hero ATK%":2.48},{"Enhancement Level":9,"Alloy":7000.0,"Hero ATK":1427,"Hero DEF":713,"Hero ATK%":2.54},{"Enhancement Level":10,"Alloy":10000.0,"Hero ATK":1469,"Hero DEF":734,"Hero ATK%":2.6},{"Enhancement Level":11,"Alloy":10000.0,"Hero ATK":1512,"Hero DEF":755,"Hero ATK%":2.66},{"Enhancement Level":12,"Alloy":10000.0,"Hero ATK":1554,"Hero DEF":776,"Hero ATK%":2.72},{"Enhancement Level":13,"Alloy":10000.0,"Hero ATK":1596,"Hero DEF":798,"Hero ATK%":2.78},{"Enhancement Level":14,"Alloy":10000.0,"Hero ATK":1639,"Hero DEF":819,"Hero ATK%":2.84},{"Enhancement Level":15,"Alloy":15000.0,"Hero ATK":1681,"Hero DEF":840,"Hero ATK%":2.9},{"Enhancement Level":16,"Alloy":15000.0,"Hero ATK":1724,"Hero DEF":861,"Hero ATK%":2.96},{"Enhancement Level":17,"Alloy":15000.0,"Hero ATK":1766,"Hero DEF":883,"Hero ATK%":3.02},{"Enhancement Level":18,"Alloy":15000.0,"Hero ATK":1809,"Hero DEF":904,"Hero ATK%":3.08},{"Enhancement Level":19,"Alloy":15000.0,"Hero ATK":1851,"Hero DEF":925,"Hero ATK%":3.14},{"Enhancement Level":20,"Alloy":20000.0,"Hero ATK":1894,"Hero DEF":946,"Hero ATK%":3.2},{"Enhancement Level":21,"Alloy":20000.0,"Hero ATK":1936,"Hero DEF":968,"Hero ATK%":3.26},{"Enhancement Level":22,"Alloy":20000.0,"Hero ATK":1979,"Hero DEF":989,"Hero ATK%":3.32},{"Enhancement Level":23,"Alloy":20000.0,"Hero ATK":2021,"Hero DEF":1010,"Hero ATK%":3.38},{"Enhancement Level":24,"Alloy":20000.0,"Hero ATK":2064,"Hero DEF":1031,"Hero ATK%":3.44},{"Enhancement Level":25,"Alloy":35000.0,"Hero ATK":2106,"Hero DEF":1053,"Hero ATK%":3.5},{"Enhancement Level":26,"Alloy":35000.0,"Hero ATK":2148,"Hero DEF":1074,"Hero ATK%":3.56},{"Enhancement Level":27,"Alloy":35000.0,"Hero ATK":2191,"Hero DEF":1095,"Hero ATK%":3.62},{"Enhancement Level":28,"Alloy":35000.0,"Hero ATK":2233,"Hero DEF":1116,"Hero ATK%":3.68},{"Enhancement Level":29,"Alloy":35000.0,"Hero ATK":2276,"Hero DEF":1138,"Hero ATK%":3.74},{"Enhancement Level":30,"Alloy":70000.0,"Hero ATK":2318,"Hero DEF":1159,"Hero ATK%":3.8},{"Enhancement Level":31,"Alloy":70000.0,"Hero ATK":2361,"Hero DEF":1180,"Hero ATK%":3.86},{"Enhancement Level":32,"Alloy":70000.0,"Hero ATK":2403,"Hero DEF":1201,"Hero ATK%":3.92},{"Enhancement Level":33,"Alloy":70000.0,"Hero ATK":2446,"Hero DEF":1222,"Hero ATK%":3.98},{"Enhancement Level":34,"Alloy":70000.0,"Hero ATK":2488,"Hero DEF":1244,"Hero ATK%":4.04},{"Enhancement Level":35,"Alloy":70000.0,"Hero ATK":2531,"Hero DEF":1265,"Hero ATK%":4.1},{"Enhancement Level":36,"Alloy":70000.0,"Hero ATK":2573,"Hero DEF":1286,"Hero ATK%":4.16},{"Enhancement Level":37,"Alloy":70000.0,"Hero ATK":2615,"Hero DEF":1307,"Hero ATK%":4.22},{"Enhancement Level":38,"Alloy":70000.0,"Hero ATK":2658,"Hero DEF":1329,"Hero ATK%":4.28},{"Enhancement Level":39,"Alloy":70000.0,"Hero ATK":2700,"Hero DEF":1350,"Hero ATK%":4.34},{"Enhancement Level":40,"Alloy":70000.0,"Hero ATK":2743,"Hero DEF":1371,"Hero ATK%":4.4},{"Enhancement Level":41,"Alloy":70000.0,"Hero ATK":2785,"Hero DEF":1392,"Hero ATK%":4.46},{"Enhancement Level":42,"Alloy":70000.0,"Hero ATK":2828,"Hero DEF":1414,"Hero ATK%":4.52},{"Enhancement Level":43,"Alloy":70000.0,"Hero ATK":2870,"Hero DEF":1435,"Hero ATK%":4.58},{"Enhancement Level":44,"Alloy":70000.0,"Hero ATK":2913,"Hero DEF":1456,"Hero ATK%":4.64},{"Enhancement Level":45,"Alloy":70000.0,"Hero ATK":2955,"Hero DEF":1477,"Hero ATK%":4.7},{"Enhancement Level":46,"Alloy":70000.0,"Hero ATK":2998,"Hero DEF":1499,"Hero ATK%":4.76},{"Enhancement Level":47,"Alloy":70000.0,"Hero ATK":3040,"Hero DEF":1520,"Hero ATK%":4.82},{"Enhancement Level":48,"Alloy":70000.0,"Hero ATK":3082,"Hero DEF":1541,"Hero ATK%":4.88},{"Enhancement Level":49,"Alloy":70000.0,"Hero ATK":3125,"Hero DEF":1562,"Hero ATK%":4.94},{"Enhancement Level":50,"Alloy":150000.0,"Hero ATK":3167,"Hero DEF":1584,"Hero ATK%":5.0},{"Enhancement Level":51,"Alloy":150000.0,"Hero ATK":3210,"Hero DEF":1605,"Hero ATK%":5.06},{"Enhancement Level":52,"Alloy":150000.0,"Hero ATK":3252,"Hero DEF":1626,"Hero ATK%":5.12},{"Enhancement Level":53,"Alloy":150000.0,"Hero ATK":3295,"Hero DEF":1647,"Hero ATK%":5.18},{"Enhancement Level":54,"Alloy":150000.0,"Hero ATK":3337,"Hero DEF":1669,"Hero ATK%":5.24},{"Enhancement Level":55,"Alloy":150000.0,"Hero ATK":3380,"Hero DEF":1690,"Hero ATK%":5.3},{"Enhancement Level":56,"Alloy":150000.0,"Hero ATK":3422,"Hero DEF":1711,"Hero ATK%":5.36},{"Enhancement Level":57,"Alloy":150000.0,"Hero ATK":3465,"Hero DEF":1732,"Hero ATK%":5.42},{"Enhancement Level":58,"Alloy":150000.0,"Hero ATK":3507,"Hero DEF":1754,"Hero ATK%":5.48},{"Enhancement Level":59,"Alloy":150000.0,"Hero ATK":3549,"Hero DEF":1775,"Hero ATK%":5.54},{"Enhancement Level":60,"Alloy":150000.0,"Hero ATK":3592,"Hero DEF":1796,"Hero ATK%":5.6},{"Enhancement Level":61,"Alloy":150000.0,"Hero ATK":3634,"Hero DEF":1817,"Hero ATK%":5.66},{"Enhancement Level":62,"Alloy":150000.0,"Hero ATK":3677,"Hero DEF":1838,"Hero ATK%":5.72},{"Enhancement Level":63,"Alloy":150000.0,"Hero ATK":3719,"Hero DEF":1860,"Hero ATK%":5.78},{"Enhancement Level":64,"Alloy":150000.0,"Hero ATK":3762,"Hero DEF":1881,"Hero ATK%":5.84},{"Enhancement Level":65,"Alloy":150000.0,"Hero ATK":3804,"Hero DEF":1902,"Hero ATK%":5.9},{"Enhancement Level":66,"Alloy":150000.0,"Hero ATK":3847,"Hero DEF":1923,"Hero ATK%":5.96},{"Enhancement Level":67,"Alloy":150000.0,"Hero ATK":3889,"Hero DEF":1945,"Hero ATK%":6.02},{"Enhancement Level":68,"Alloy":150000.0,"Hero ATK":3932,"Hero DEF":1966,"Hero ATK%":6.08},{"Enhancement Level":69,"Alloy":150000.0,"Hero ATK":3974,"Hero DEF":1987,"Hero ATK%":6.14},{"Enhancement Level":70,"Alloy":300000.0,"Hero ATK":4017,"Hero DEF":2008,"Hero ATK%":6.2},{"Enhancement Level":71,"Alloy":300000.0,"Hero ATK":4059,"Hero DEF":2030,"Hero ATK%":6.26},{"Enhancement Level":72,"Alloy":300000.0,"Hero ATK":4101,"Hero DEF":2051,"Hero ATK%":6.32},{"Enhancement Level":73,"Alloy":300000.0,"Hero ATK":4144,"Hero DEF":2072,"Hero ATK%":6.38},{"Enhancement Level":74,"Alloy":300000.0,"Hero ATK":4186,"Hero DEF":2093,"Hero ATK%":6.44},{"Enhancement Level":75,"Alloy":300000.0,"Hero ATK":4229,"Hero DEF":2115,"Hero ATK%":6.5},{"Enhancement Level":76,"Alloy":300000.0,"Hero ATK":4271,"Hero DEF":2136,"Hero ATK%":6.6},{"Enhancement Level":77,"Alloy":300000.0,"Hero ATK":4314,"Hero DEF":2157,"Hero ATK%":6.7},{"Enhancement Level":78,"Alloy":300000.0,"Hero ATK":4356,"Hero DEF":2178,"Hero ATK%":6.8},{"Enhancement Level":79,"Alloy":300000.0,"Hero ATK":4399,"Hero DEF":2200,"Hero ATK%":6.9},{"Enhancement Level":80,"Alloy":300000.0,"Hero ATK":4441,"Hero DEF":2221,"Hero ATK%":7.0},{"Enhancement Level":81,"Alloy":300000.0,"Hero ATK":4484,"Hero DEF":2242,"Hero ATK%":7.1},{"Enhancement Level":82,"Alloy":300000.0,"Hero ATK":4526,"Hero DEF":2263,"Hero ATK%":7.2},{"Enhancement Level":83,"Alloy":300000.0,"Hero ATK":4568,"Hero DEF":2285,"Hero ATK%":7.3},{"Enhancement Level":84,"Alloy":300000.0,"Hero ATK":4611,"Hero DEF":2306,"Hero ATK%":7.4},{"Enhancement Level":85,"Alloy":300000.0,"Hero ATK":4653,"Hero DEF":2327,"Hero ATK%":7.5},{"Enhancement Level":86,"Alloy":300000.0,"Hero ATK":4696,"Hero DEF":2348,"Hero ATK%":7.6},{"Enhancement Level":87,"Alloy":300000.0,"Hero ATK":4738,"Hero DEF":2370,"Hero ATK%":7.7},{"Enhancement Level":88,"Alloy":300000.0,"Hero ATK":4781,"Hero DEF":2391,"Hero ATK%":7.8},{"Enhancement Level":89,"Alloy":300000.0,"Hero ATK":4823,"Hero DEF":2412,"Hero ATK%":7.9},{"Enhancement Level":90,"Alloy":450000.0,"Hero ATK":4866,"Hero DEF":2433,"Hero ATK%":8.0},{"Enhancement Level":91,"Alloy":450000.0,"Hero ATK":4908,"Hero DEF":2454,"Hero ATK%":8.2},{"Enhancement Level":92,"Alloy":450000.0,"Hero ATK":4951,"Hero DEF":2476,"Hero ATK%":8.4},{"Enhancement Level":93,"Alloy":450000.0,"Hero ATK":4993,"Hero DEF":2497,"Hero ATK%":8.6},{"Enhancement Level":94,"Alloy":450000.0,"Hero ATK":5035,"Hero DEF":2518,"Hero ATK%":8.8},{"Enhancement Level":95,"Alloy":450000.0,"Hero ATK":5078,"Hero DEF":2539,"Hero ATK%":9.0},{"Enhancement Level":96,"Alloy":450000.0,"Hero ATK":5120,"Hero DEF":2561,"Hero ATK%":9.2},{"Enhancement Level":97,"Alloy":450000.0,"Hero ATK":5163,"Hero DEF":2582,"Hero ATK%":9.4},{"Enhancement Level":98,"Alloy":450000.0,"Hero ATK":5205,"Hero DEF":2603,"Hero ATK%":9.6},{"Enhancement Level":99,"Alloy":450000.0,"Hero ATK":5248,"Hero DEF":2624,"Hero ATK%":9.8},{"Enhancement Level":100,"Alloy":450000.0,"Hero ATK":5290,"Hero DEF":2646,"Hero ATK%":10.0}]},"armor":{"hex_levels":["1","2","3","4","5"],"power":[380750,456075,508305,608120,765880],"basic":{"hero_atk":[3380,3592,3804,4017,4229],"hero_def":[1690,1796,1902,2008,2115],"hero_def_pct":[5.3,5.6,5.9,6.2,6.5]},"enhancement":[{"Enhancement Level":0,"Alloy":null,"Hero DEF":1045,"Hero ATK":522,"Hero DEF%":2.0},{"Enhancement Level":1,"Alloy":5000.0,"Hero DEF":1087,"Hero ATK":543,"Hero DEF%":2.06},{"Enhancement Level":2,"Alloy":5000.0,"Hero DEF":1129,"Hero ATK":564,"Hero DEF%":2.12},{"Enhancement Level":3,"Alloy":5000.0,"Hero DEF":1172,"Hero ATK":585,"Hero DEF%":2.18},{"Enhancement Level":4,"Alloy":5000.0,"Hero DEF":1214,"Hero ATK":606,"Hero DEF%":2.24},{"Enhancement Level":5,"Alloy":7000.0,"Hero DEF":1257,"Hero ATK":628,"Hero DEF%":2.3},{"Enhancement Level":6,"Alloy":7000.0,"Hero DEF":1299,"Hero ATK":649,"Hero DEF%":2.36},{"Enhancement Level":7,"Alloy":7000.0,"Hero DEF":1342,"Hero ATK":670,"Hero DEF%":2.42},{"Enhancement Level":8,"Alloy":7000.0,"Hero DEF":1384,"Hero ATK":691,"Hero DEF%":2.48},{"Enhancement Level":9,"Alloy":7000.0,"Hero DEF":1427,"Hero ATK":713,"Hero DEF%":2.54},{"Enhancement Level":10,"Alloy":10000.0,"Hero DEF":1469,"Hero ATK":734,"Hero DEF%":2.6},{"Enhancement Level":11,"Alloy":10000.0,"Hero DEF":1512,"Hero ATK":755,"Hero DEF%":2.66},{"Enhancement Level":12,"Alloy":10000.0,"Hero DEF":1554,"Hero ATK":776,"Hero DEF%":2.72},{"Enhancement Level":13,"Alloy":10000.0,"Hero DEF":1596,"Hero ATK":798,"Hero DEF%":2.78},{"Enhancement Level":14,"Alloy":10000.0,"Hero DEF":1639,"Hero ATK":819,"Hero DEF%":2.84},{"Enhancement Level":15,"Alloy":15000.0,"Hero DEF":1681,"Hero ATK":840,"Hero DEF%":2.9},{"Enhancement Level":16,"Alloy":15000.0,"Hero DEF":1724,"Hero ATK":861,"Hero DEF%":2.96},{"Enhancement Level":17,"Alloy":15000.0,"Hero DEF":1766,"Hero ATK":883,"Hero DEF%":3.02},{"Enhancement Level":18,"Alloy":15000.0,"Hero DEF":1809,"Hero ATK":904,"Hero DEF%":3.08},{"Enhancement Level":19,"Alloy":15000.0,"Hero DEF":1851,"Hero ATK":925,"Hero DEF%":3.14},{"Enhancement Level":20,"Alloy":20000.0,"Hero DEF":1894,"Hero ATK":946,"Hero DEF%":3.2},{"Enhancement Level":21,"Alloy":20000.0,"Hero DEF":1936,"Hero ATK":968,"Hero DEF%":3.26},{"Enhancement Level":22,"Alloy":20000.0,"Hero DEF":1979,"Hero ATK":989,"Hero DEF%":3.32},{"Enhancement Level":23,"Alloy":20000.0,"Hero DEF":2021,"Hero ATK":1010,"Hero DEF%":3.38},{"Enhancement Level":24,"Alloy":20000.0,"Hero DEF":2064,"Hero ATK":1031,"Hero DEF%":3.44},{"Enhancement Level":25,"Alloy":35000.0,"Hero DEF":2106,"Hero ATK":1053,"Hero DEF%":3.5},{"Enhancement Level":26,"Alloy":35000.0,"Hero DEF":2148,"Hero ATK":1074,"Hero DEF%":3.56},{"Enhancement Level":27,"Alloy":35000.0,"Hero DEF":2191,"Hero ATK":1095,"Hero DEF%":3.62},{"Enhancement Level":28,"Alloy":35000.0,"Hero DEF":2233,"Hero ATK":1116,"Hero DEF%":3.68},{"Enhancement Level":29,"Alloy":35000.0,"Hero DEF":2276,"Hero ATK":1138,"Hero DEF%":3.74},{"Enhancement Level":30,"Alloy":70000.0,"Hero DEF":2318,"Hero ATK":1159,"Hero DEF%":3.8},{"Enhancement Level":31,"Alloy":70000.0,"Hero DEF":2361,"Hero ATK":1180,"Hero DEF%":3.86},{"Enhancement Level":32,"Alloy":70000.0,"Hero DEF":2403,"Hero ATK":1201,"Hero DEF%":3.92},{"Enhancement Level":33,"Alloy":70000.0,"Hero DEF":2446,"Hero ATK":1222,"Hero DEF%":3.98},{"Enhancement Level":34,"Alloy":70000.0,"Hero DEF":2488,"Hero ATK":1244,"Hero DEF%":4.04},{"Enhancement Level":35,"Alloy":70000.0,"Hero DEF":2531,"Hero ATK":1265,"Hero DEF%":4.1},{"Enhancement Level":36,"Alloy":70000.0,"Hero DEF":2573,"Hero ATK":1286,"Hero DEF%":4.16},{"Enhancement Level":37,"Alloy":70000.0,"Hero DEF":2615,"Hero ATK":1307,"Hero DEF%":4.22},{"Enhancement Level":38,"Alloy":70000.0,"Hero DEF":2658,"Hero ATK":1329,"Hero DEF%":4.28},{"Enhancement Level":39,"Alloy":70000.0,"Hero DEF":2700,"Hero ATK":1350,"Hero DEF%":4.34},{"Enhancement Level":40,"Alloy":70000.0,"Hero DEF":2743,"Hero ATK":1371,"Hero DEF%":4.4},{"Enhancement Level":41,"Alloy":70000.0,"Hero DEF":2785,"Hero ATK":1392,"Hero DEF%":4.46},{"Enhancement Level":42,"Alloy":70000.0,"Hero DEF":2828,"Hero ATK":1414,"Hero DEF%":4.52},{"Enhancement Level":43,"Alloy":70000.0,"Hero DEF":2870,"Hero ATK":1435,"Hero DEF%":4.58},{"Enhancement Level":44,"Alloy":70000.0,"Hero DEF":2913,"Hero ATK":1456,"Hero DEF%":4.64},{"Enhancement Level":45,"Alloy":70000.0,"Hero DEF":2955,"Hero ATK":1477,"Hero DEF%":4.7},{"Enhancement Level":46,"Alloy":70000.0,"Hero DEF":2998,"Hero ATK":1499,"Hero DEF%":4.76},{"Enhancement Level":47,"Alloy":70000.0,"Hero DEF":3040,"Hero ATK":1520,"Hero DEF%":4.82},{"Enhancement Level":48,"Alloy":70000.0,"Hero DEF":3082,"Hero ATK":1541,"Hero DEF%":4.88},{"Enhancement Level":49,"Alloy":70000.0,"Hero DEF":3125,"Hero ATK":1562,"Hero DEF%":4.94},{"Enhancement Level":50,"Alloy":150000.0,"Hero DEF":3167,"Hero ATK":1584,"Hero DEF%":5.0},{"Enhancement Level":51,"Alloy":150000.0,"Hero DEF":3210,"Hero ATK":1605,"Hero DEF%":5.06},{"Enhancement Level":52,"Alloy":150000.0,"Hero DEF":3252,"Hero ATK":1626,"Hero DEF%":5.12},{"Enhancement Level":53,"Alloy":150000.0,"Hero DEF":3295,"Hero ATK":1647,"Hero DEF%":5.18},{"Enhancement Level":54,"Alloy":150000.0,"Hero DEF":3337,"Hero ATK":1669,"Hero DEF%":5.24},{"Enhancement Level":55,"Alloy":150000.0,"Hero DEF":3380,"Hero ATK":1690,"Hero DEF%":5.3},{"Enhancement Level":56,"Alloy":150000.0,"Hero DEF":3422,"Hero ATK":1711,"Hero DEF%":5.36},{"Enhancement Level":57,"Alloy":150000.0,"Hero DEF":3465,"Hero ATK":1732,"Hero DEF%":5.42},{"Enhancement Level":58,"Alloy":150000.0,"Hero DEF":3507,"Hero ATK":1754,"Hero DEF%":5.48},{"Enhancement Level":59,"Alloy":150000.0,"Hero DEF":3549,"Hero ATK":1775,"Hero DEF%":5.54},{"Enhancement Level":60,"Alloy":150000.0,"Hero DEF":3592,"Hero ATK":1796,"Hero DEF%":5.6},{"Enhancement Level":61,"Alloy":150000.0,"Hero DEF":3634,"Hero ATK":1817,"Hero DEF%":5.66},{"Enhancement Level":62,"Alloy":150000.0,"Hero DEF":3677,"Hero ATK":1838,"Hero DEF%":5.72},{"Enhancement Level":63,"Alloy":150000.0,"Hero DEF":3719,"Hero ATK":1860,"Hero DEF%":5.78},{"Enhancement Level":64,"Alloy":150000.0,"Hero DEF":3762,"Hero ATK":1881,"Hero DEF%":5.84},{"Enhancement Level":65,"Alloy":150000.0,"Hero DEF":3804,"Hero ATK":1902,"Hero DEF%":5.9},{"Enhancement Level":66,"Alloy":150000.0,"Hero DEF":3847,"Hero ATK":1923,"Hero DEF%":5.96},{"Enhancement Level":67,"Alloy":150000.0,"Hero DEF":3889,"Hero ATK":1945,"Hero DEF%":6.02},{"Enhancement Level":68,"Alloy":150000.0,"Hero DEF":3932,"Hero ATK":1966,"Hero DEF%":6.08},{"Enhancement Level":69,"Alloy":150000.0,"Hero DEF":3974,"Hero ATK":1987,"Hero DEF%":6.14},{"Enhancement Level":70,"Alloy":300000.0,"Hero DEF":4017,"Hero ATK":2008,"Hero DEF%":6.2},{"Enhancement Level":71,"Alloy":300000.0,"Hero DEF":4059,"Hero ATK":2030,"Hero DEF%":6.26},{"Enhancement Level":72,"Alloy":300000.0,"Hero DEF":4101,"Hero ATK":2051,"Hero DEF%":6.32},{"Enhancement Level":73,"Alloy":300000.0,"Hero DEF":4144,"Hero ATK":2072,"Hero DEF%":6.38},{"Enhancement Level":74,"Alloy":300000.0,"Hero DEF":4186,"Hero ATK":2093,"Hero DEF%":6.44},{"Enhancement Level":75,"Alloy":300000.0,"Hero DEF":4229,"Hero ATK":2115,"Hero DEF%":6.5},{"Enhancement Level":76,"Alloy":300000.0,"Hero DEF":4271,"Hero ATK":2136,"Hero DEF%":6.6},{"Enhancement Level":77,"Alloy":300000.0,"Hero DEF":4314,"Hero ATK":2157,"Hero DEF%":6.7},{"Enhancement Level":78,"Alloy":300000.0,"Hero DEF":4356,"Hero ATK":2178,"Hero DEF%":6.8},{"Enhancement Level":79,"Alloy":300000.0,"Hero DEF":4399,"Hero ATK":2200,"Hero DEF%":6.9},{"Enhancement Level":80,"Alloy":300000.0,"Hero DEF":4441,"Hero ATK":2221,"Hero DEF%":7.0},{"Enhancement Level":81,"Alloy":300000.0,"Hero DEF":4484,"Hero ATK":2242,"Hero DEF%":7.1},{"Enhancement Level":82,"Alloy":300000.0,"Hero DEF":4526,"Hero ATK":2263,"Hero DEF%":7.2},{"Enhancement Level":83,"Alloy":300000.0,"Hero DEF":4568,"Hero ATK":2285,"Hero DEF%":7.3},{"Enhancement Level":84,"Alloy":300000.0,"Hero DEF":4611,"Hero ATK":2306,"Hero DEF%":7.4},{"Enhancement Level":85,"Alloy":300000.0,"Hero DEF":4653,"Hero ATK":2327,"Hero DEF%":7.5},{"Enhancement Level":86,"Alloy":300000.0,"Hero DEF":4696,"Hero ATK":2348,"Hero DEF%":7.6},{"Enhancement Level":87,"Alloy":300000.0,"Hero DEF":4738,"Hero ATK":2370,"Hero DEF%":7.7},{"Enhancement Level":88,"Alloy":300000.0,"Hero DEF":4781,"Hero ATK":2391,"Hero DEF%":7.8},{"Enhancement Level":89,"Alloy":300000.0,"Hero DEF":4823,"Hero ATK":2412,"Hero DEF%":7.9},{"Enhancement Level":90,"Alloy":450000.0,"Hero DEF":4866,"Hero ATK":2433,"Hero DEF%":8.0},{"Enhancement Level":91,"Alloy":450000.0,"Hero DEF":4908,"Hero ATK":2454,"Hero DEF%":8.2},{"Enhancement Level":92,"Alloy":450000.0,"Hero DEF":4951,"Hero ATK":2476,"Hero DEF%":8.4},{"Enhancement Level":93,"Alloy":450000.0,"Hero DEF":4993,"Hero ATK":2497,"Hero DEF%":8.6},{"Enhancement Level":94,"Alloy":450000.0,"Hero DEF":5035,"Hero ATK":2518,"Hero DEF%":8.8},{"Enhancement Level":95,"Alloy":450000.0,"Hero DEF":5078,"Hero ATK":2539,"Hero DEF%":9.0},{"Enhancement Level":96,"Alloy":450000.0,"Hero DEF":5120,"Hero ATK":2561,"Hero DEF%":9.2},{"Enhancement Level":97,"Alloy":450000.0,"Hero DEF":5163,"Hero ATK":2582,"Hero DEF%":9.4},{"Enhancement Level":98,"Alloy":450000.0,"Hero DEF":5205,"Hero ATK":2603,"Hero DEF%":9.6},{"Enhancement Level":99,"Alloy":450000.0,"Hero DEF":5248,"Hero ATK":2624,"Hero DEF%":9.8},{"Enhancement Level":100,"Alloy":450000.0,"Hero DEF":5290,"Hero ATK":2646,"Hero DEF%":10.0}]},"boots":{"hex_levels":["1","2","3","4","5"],"power":[369540,472075,574555,677120,779630],"basic":{"hero_atk":[1690,1796,1902,2008,2115],"hero_def":[3380,3592,3804,4017,4229],"hero_def_pct":[5.3,5.6,5.9,6.2,6.5]},"enhancement":[{"Enhancement Level":0,"Alloy":null,"Hero DEF":1045,"Hero ATK":522,"Hero DEF%":2.0},{"Enhancement Level":1,"Alloy":5000.0,"Hero DEF":1087,"Hero ATK":543,"Hero DEF%":2.06},{"Enhancement Level":2,"Alloy":5000.0,"Hero DEF":1129,"Hero ATK":564,"Hero DEF%":2.12},{"Enhancement Level":3,"Alloy":5000.0,"Hero DEF":1172,"Hero ATK":585,"Hero DEF%":2.18},{"Enhancement Level":4,"Alloy":5000.0,"Hero DEF":1214,"Hero ATK":606,"Hero DEF%":2.24},{"Enhancement Level":5,"Alloy":7000.0,"Hero DEF":1257,"Hero ATK":628,"Hero DEF%":2.3},{"Enhancement Level":6,"Alloy":7000.0,"Hero DEF":1299,"Hero ATK":649,"Hero DEF%":2.36},{"Enhancement Level":7,"Alloy":7000.0,"Hero DEF":1342,"Hero ATK":670,"Hero DEF%":2.42},{"Enhancement Level":8,"Alloy":7000.0,"Hero DEF":1384,"Hero ATK":691,"Hero DEF%":2.48},{"Enhancement Level":9,"Alloy":7000.0,"Hero DEF":1427,"Hero ATK":713,"Hero DEF%":2.54},{"Enhancement Level":10,"Alloy":10000.0,"Hero DEF":1469,"Hero ATK":734,"Hero DEF%":2.6},{"Enhancement Level":11,"Alloy":10000.0,"Hero DEF":1512,"Hero ATK":755,"Hero DEF%":2.66},{"Enhancement Level":12,"Alloy":10000.0,"Hero DEF":1554,"Hero ATK":776,"Hero DEF%":2.72},{"Enhancement Level":13,"Alloy":10000.0,"Hero DEF":1596,"Hero ATK":798,"Hero DEF%":2.78},{"Enhancement Level":14,"Alloy":10000.0,"Hero DEF":1639,"Hero ATK":819,"Hero DEF%":2.84},{"Enhancement Level":15,"Alloy":15000.0,"Hero DEF":1681,"Hero ATK":840,"Hero DEF%":2.9},{"Enhancement Level":16,"Alloy":15000.0,"Hero DEF":1724,"Hero ATK":861,"Hero DEF%":2.96},{"Enhancement Level":17,"Alloy":15000.0,"Hero DEF":1766,"Hero ATK":883,"Hero DEF%":3.02},{"Enhancement Level":18,"Alloy":15000.0,"Hero DEF":1809,"Hero ATK":904,"Hero DEF%":3.08},{"Enhancement Level":19,"Alloy":15000.0,"Hero DEF":1851,"Hero ATK":925,"Hero DEF%":3.14},{"Enhancement Level":20,"Alloy":20000.0,"Hero DEF":1894,"Hero ATK":946,"Hero DEF%":3.2},{"Enhancement Level":21,"Alloy":20000.0,"Hero DEF":1936,"Hero ATK":968,"Hero DEF%":3.26},{"Enhancement Level":22,"Alloy":20000.0,"Hero DEF":1979,"Hero ATK":989,"Hero DEF%":3.32},{"Enhancement Level":23,"Alloy":20000.0,"Hero DEF":2021,"Hero ATK":1010,"Hero DEF%":3.38},{"Enhancement Level":24,"Alloy":20000.0,"Hero DEF":2064,"Hero ATK":1031,"Hero DEF%":3.44},{"Enhancement Level":25,"Alloy":35000.0,"Hero DEF":2106,"Hero ATK":1053,"Hero DEF%":3.5},{"Enhancement Level":26,"Alloy":35000.0,"Hero DEF":2148,"Hero ATK":1074,"Hero DEF%":3.56},{"Enhancement Level":27,"Alloy":35000.0,"Hero DEF":2191,"Hero ATK":1095,"Hero DEF%":3.62},{"Enhancement Level":28,"Alloy":35000.0,"Hero DEF":2233,"Hero ATK":1116,"Hero DEF%":3.68},{"Enhancement Level":29,"Alloy":35000.0,"Hero DEF":2276,"Hero ATK":1138,"Hero DEF%":3.74},{"Enhancement Level":30,"Alloy":70000.0,"Hero DEF":2318,"Hero ATK":1159,"Hero DEF%":3.8},{"Enhancement Level":31,"Alloy":70000.0,"Hero DEF":2361,"Hero ATK":1180,"Hero DEF%":3.86},{"Enhancement Level":32,"Alloy":70000.0,"Hero DEF":2403,"Hero ATK":1201,"Hero DEF%":3.92},{"Enhancement Level":33,"Alloy":70000.0,"Hero DEF":2446,"Hero ATK":1222,"Hero DEF%":3.98},{"Enhancement Level":34,"Alloy":70000.0,"Hero DEF":2488,"Hero ATK":1244,"Hero DEF%":4.04},{"Enhancement Level":35,"Alloy":70000.0,"Hero DEF":2531,"Hero ATK":1265,"Hero DEF%":4.1},{"Enhancement Level":36,"Alloy":70000.0,"Hero DEF":2573,"Hero ATK":1286,"Hero DEF%":4.16},{"Enhancement Level":37,"Alloy":70000.0,"Hero DEF":2615,"Hero ATK":1307,"Hero DEF%":4.22},{"Enhancement Level":38,"Alloy":70000.0,"Hero DEF":2658,"Hero ATK":1329,"Hero DEF%":4.28},{"Enhancement Level":39,"Alloy":70000.0,"Hero DEF":2700,"Hero ATK":1350,"Hero DEF%":4.34},{"Enhancement Level":40,"Alloy":70000.0,"Hero DEF":2743,"Hero ATK":1371,"Hero DEF%":4.4},{"Enhancement Level":41,"Alloy":70000.0,"Hero DEF":2785,"Hero ATK":1392,"Hero DEF%":4.46},{"Enhancement Level":42,"Alloy":70000.0,"Hero DEF":2828,"Hero ATK":1414,"Hero DEF%":4.52},{"Enhancement Level":43,"Alloy":70000.0,"Hero DEF":2870,"Hero ATK":1435,"Hero DEF%":4.58},{"Enhancement Level":44,"Alloy":70000.0,"Hero DEF":2913,"Hero ATK":1456,"Hero DEF%":4.64},{"Enhancement Level":45,"Alloy":70000.0,"Hero DEF":2955,"Hero ATK":1477,"Hero DEF%":4.7},{"Enhancement Level":46,"Alloy":70000.0,"Hero DEF":2998,"Hero ATK":1499,"Hero DEF%":4.76},{"Enhancement Level":47,"Alloy":70000.0,"Hero DEF":3040,"Hero ATK":1520,"Hero DEF%":4.82},{"Enhancement Level":48,"Alloy":70000.0,"Hero DEF":3082,"Hero ATK":1541,"Hero DEF%":4.88},{"Enhancement Level":49,"Alloy":70000.0,"Hero DEF":3125,"Hero ATK":1562,"Hero DEF%":4.94},{"Enhancement Level":50,"Alloy":150000.0,"Hero DEF":3167,"Hero ATK":1584,"Hero DEF%":5.0},{"Enhancement Level":51,"Alloy":150000.0,"Hero DEF":3210,"Hero ATK":1605,"Hero DEF%":5.06},{"Enhancement Level":52,"Alloy":150000.0,"Hero DEF":3252,"Hero ATK":1626,"Hero DEF%":5.12},{"Enhancement Level":53,"Alloy":150000.0,"Hero DEF":3295,"Hero ATK":1647,"Hero DEF%":5.18},{"Enhancement Level":54,"Alloy":150000.0,"Hero DEF":3337,"Hero ATK":1669,"Hero DEF%":5.24},{"Enhancement Level":55,"Alloy":150000.0,"Hero DEF":3380,"Hero ATK":1690,"Hero DEF%":5.3},{"Enhancement Level":56,"Alloy":150000.0,"Hero DEF":3422,"Hero ATK":1711,"Hero DEF%":5.36},{"Enhancement Level":57,"Alloy":150000.0,"Hero DEF":3465,"Hero ATK":1732,"Hero DEF%":5.42},{"Enhancement Level":58,"Alloy":150000.0,"Hero DEF":3507,"Hero ATK":1754,"Hero DEF%":5.48},{"Enhancement Level":59,"Alloy":150000.0,"Hero DEF":3549,"Hero ATK":1775,"Hero DEF%":5.54},{"Enhancement Level":60,"Alloy":150000.0,"Hero DEF":3592,"Hero ATK":1796,"Hero DEF%":5.6},{"Enhancement Level":61,"Alloy":150000.0,"Hero DEF":3634,"Hero ATK":1817,"Hero DEF%":5.66},{"Enhancement Level":62,"Alloy":150000.0,"Hero DEF":3677,"Hero ATK":1838,"Hero DEF%":5.72},{"Enhancement Level":63,"Alloy":150000.0,"Hero DEF":3719,"Hero ATK":1860,"Hero DEF%":5.78},{"Enhancement Level":64,"Alloy":150000.0,"Hero DEF":3762,"Hero ATK":1881,"Hero DEF%":5.84},{"Enhancement Level":65,"Alloy":150000.0,"Hero DEF":3804,"Hero ATK":1902,"Hero DEF%":5.9},{"Enhancement Level":66,"Alloy":150000.0,"Hero DEF":3847,"Hero ATK":1923,"Hero DEF%":5.96},{"Enhancement Level":67,"Alloy":150000.0,"Hero DEF":3889,"Hero ATK":1945,"Hero DEF%":6.02},{"Enhancement Level":68,"Alloy":150000.0,"Hero DEF":3932,"Hero ATK":1966,"Hero DEF%":6.08},{"Enhancement Level":69,"Alloy":150000.0,"Hero DEF":3974,"Hero ATK":1987,"Hero DEF%":6.14},{"Enhancement Level":70,"Alloy":300000.0,"Hero DEF":4017,"Hero ATK":2008,"Hero DEF%":6.2},{"Enhancement Level":71,"Alloy":300000.0,"Hero DEF":4059,"Hero ATK":2030,"Hero DEF%":6.26},{"Enhancement Level":72,"Alloy":300000.0,"Hero DEF":4101,"Hero ATK":2051,"Hero DEF%":6.32},{"Enhancement Level":73,"Alloy":300000.0,"Hero DEF":4144,"Hero ATK":2072,"Hero DEF%":6.38},{"Enhancement Level":74,"Alloy":300000.0,"Hero DEF":4186,"Hero ATK":2093,"Hero DEF%":6.44},{"Enhancement Level":75,"Alloy":300000.0,"Hero DEF":4229,"Hero ATK":2115,"Hero DEF%":6.5},{"Enhancement Level":76,"Alloy":300000.0,"Hero DEF":4271,"Hero ATK":2136,"Hero DEF%":6.6},{"Enhancement Level":77,"Alloy":300000.0,"Hero DEF":4314,"Hero ATK":2157,"Hero DEF%":6.7},{"Enhancement Level":78,"Alloy":300000.0,"Hero DEF":4356,"Hero ATK":2178,"Hero DEF%":6.8},{"Enhancement Level":79,"Alloy":300000.0,"Hero DEF":4399,"Hero ATK":2200,"Hero DEF%":6.9},{"Enhancement Level":80,"Alloy":300000.0,"Hero DEF":4441,"Hero ATK":2221,"Hero DEF%":7.0},{"Enhancement Level":81,"Alloy":300000.0,"Hero DEF":4484,"Hero ATK":2242,"Hero DEF%":7.1},{"Enhancement Level":82,"Alloy":300000.0,"Hero DEF":4526,"Hero ATK":2263,"Hero DEF%":7.2},{"Enhancement Level":83,"Alloy":300000.0,"Hero DEF":4568,"Hero ATK":2285,"Hero DEF%":7.3},{"Enhancement Level":84,"Alloy":300000.0,"Hero DEF":4611,"Hero ATK":2306,"Hero DEF%":7.4},{"Enhancement Level":85,"Alloy":300000.0,"Hero DEF":4653,"Hero ATK":2327,"Hero DEF%":7.5},{"Enhancement Level":86,"Alloy":300000.0,"Hero DEF":4696,"Hero ATK":2348,"Hero DEF%":7.6},{"Enhancement Level":87,"Alloy":300000.0,"Hero DEF":4738,"Hero ATK":2370,"Hero DEF%":7.7},{"Enhancement Level":88,"Alloy":300000.0,"Hero DEF":4781,"Hero ATK":2391,"Hero DEF%":7.8},{"Enhancement Level":89,"Alloy":300000.0,"Hero DEF":4823,"Hero ATK":2412,"Hero DEF%":7.9},{"Enhancement Level":90,"Alloy":450000.0,"Hero DEF":4866,"Hero ATK":2433,"Hero DEF%":8.0},{"Enhancement Level":91,"Alloy":450000.0,"Hero DEF":4908,"Hero ATK":2454,"Hero DEF%":8.2},{"Enhancement Level":92,"Alloy":450000.0,"Hero DEF":4951,"Hero ATK":2476,"Hero DEF%":8.4},{"Enhancement Level":93,"Alloy":450000.0,"Hero DEF":4993,"Hero ATK":2497,"Hero DEF%":8.6},{"Enhancement Level":94,"Alloy":450000.0,"Hero DEF":5035,"Hero ATK":2518,"Hero DEF%":8.8},{"Enhancement Level":95,"Alloy":450000.0,"Hero DEF":5078,"Hero ATK":2539,"Hero DEF%":9.0},{"Enhancement Level":96,"Alloy":450000.0,"Hero DEF":5120,"Hero ATK":2561,"Hero DEF%":9.2},{"Enhancement Level":97,"Alloy":450000.0,"Hero DEF":5163,"Hero ATK":2582,"Hero DEF%":9.4},{"Enhancement Level":98,"Alloy":450000.0,"Hero DEF":5205,"Hero ATK":2603,"Hero DEF%":9.6},{"Enhancement Level":99,"Alloy":450000.0,"Hero DEF":5248,"Hero ATK":2624,"Hero DEF%":9.8},{"Enhancement Level":100,"Alloy":450000.0,"Hero DEF":5290,"Hero ATK":2646,"Hero DEF%":10.0}]},"promotion_cost":[{"Hexagon":" 1/6","Cents (M)":1,"Power Core":100,"Orange Equipment":null},{"Hexagon":" 2/6","Cents (M)":1,"Power Core":100,"Orange Equipment":null},{"Hexagon":" 3/6","Cents (M)":1,"Power Core":200,"Orange Equipment":null},{"Hexagon":" 4/6","Cents (M)":1,"Power Core":200,"Orange Equipment":null},{"Hexagon":" 5/6","Cents (M)":1,"Power Core":200,"Orange Equipment":null},{"Hexagon":"1","Cents (M)":1.5,"Power Core":300,"Orange Equipment":null},{"Hexagon":"1 1/6","Cents (M)":1.5,"Power Core":300,"Orange Equipment":null},{"Hexagon":"1 2/6","Cents (M)":1.5,"Power Core":300,"Orange Equipment":null},{"Hexagon":"1 3/6","Cents (M)":1.5,"Power Core":500,"Orange Equipment":null},{"Hexagon":"1 4/6","Cents (M)":1.5,"Power Core":500,"Orange Equipment":null},{"Hexagon":"1 5/6","Cents (M)":1.5,"Power Core":500,"Orange Equipment":null},{"Hexagon":"2","Cents (M)":2,"Power Core":700,"Orange Equipment":null},{"Hexagon":"2 1/6","Cents (M)":2,"Power Core":700,"Orange Equipment":null},{"Hexagon":"2 2/6","Cents (M)":2,"Power Core":700,"Orange Equipment":null},{"Hexagon":"2 3/6","Cents (M)":2,"Power Core":700,"Orange Equipment":null},{"Hexagon":"2 4/6","Cents (M)":2,"Power Core":700,"Orange Equipment":null},{"Hexagon":"2 5/6","Cents (M)":2,"Power Core":700,"Orange Equipment":null},{"Hexagon":"3","Cents (M)":2.5,"Power Core":1000,"Orange Equipment":null},{"Hexagon":"3 1/6","Cents (M)":2.5,"Power Core":1000,"Orange Equipment":null},{"Hexagon":"3 2/6","Cents (M)":2.5,"Power Core":1000,"Orange Equipment":null},{"Hexagon":"3 3/6","Cents (M)":2.5,"Power Core":1000,"Orange Equipment":null},{"Hexagon":"3 4/6","Cents (M)":2.5,"Power Core":1000,"Orange Equipment":null},{"Hexagon":"3 5/6","Cents (M)":2.5,"Power Core":1000,"Orange Equipment":null},{"Hexagon":"4","Cents (M)":3,"Power Core":1500,"Orange Equipment":1},{"Hexagon":"4 1/6","Cents (M)":3,"Power Core":1500,"Orange Equipment":1},{"Hexagon":"4 2/6","Cents (M)":3,"Power Core":1500,"Orange Equipment":1},{"Hexagon":"4 3/6","Cents (M)":3,"Power Core":1500,"Orange Equipment":2},{"Hexagon":"4 4/6","Cents (M)":3,"Power Core":1500,"Orange Equipment":1},{"Hexagon":"4 5/6","Cents (M)":3,"Power Core":1500,"Orange Equipment":1},{"Hexagon":"5","Cents (M)":9,"Power Core":9000,"Orange Equipment":3},{"Hexagon":null,"Cents (M)":null,"Power Core":null,"Orange Equipment":null},{"Hexagon":"Total","Cents (M)":68,"Power Core":25400,"Orange Equipment":10},{"Hexagon":null,"Cents (M)":null,"Power Core":null,"Orange Equipment":null}]};
 
-    // Embedded base64 images - Replace with your actual uploaded images
-    const GEAR_IMAGES = {
-      gun: "data:image/jpeg;base64,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: "data:image/jpeg;base64,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
+    // IMAGES EMBEDDED
+    const GEAR_IMAGES_B64 = {
+      gun: `data:image/jpeg;base64,${atob('your_gun_base64_here')}`,
+      helmet: `data:image/jpeg;base64,${atob('your_helmet_base64_here')}`,
+      armor: `data:image/jpeg;base64,${atob('your_armor_base64_here')}`,
+      boots: `data:image/jpeg;base64,${atob('your_boots_base64_here')}`
+    };
+
+    const TRANSLATIONS = {
+      en: {
+        hexagon: "Hexagon",
+        power: "Power",
+        level: "Level",
+        heroAtk: "Hero ATK",
+        heroDef: "Hero DEF",
+        heroAtkPct: "Hero ATK%",
+        heroDefPct: "Hero DEF%",
+        alloy: "Alloy",
+        cents: "Zents (M)",
+        powerCore: "Power Core",
+        orangeEquip: "Orange Equipment",
+        powerByHex: "Power (Hexagon 1-5)",
+        basicStats: "Basic Stats",
+        enhancement: "Enhancement (0-100)"
+      },
+      ja: {
+        hexagon: "ヘキサゴン（星）",
+        power: "Power",
+        level: "Level",
+        heroAtk: "ヒーロー攻撃力",
+        heroDef: "ヒーロー防御力",
+        heroAtkPct: "ヒーロー攻撃力％",
+        heroDefPct: "ヒーロー防御力％",
+        alloy: "合金",
+        cents: "Zコイン（M）",
+        powerCore: "Power Core",
+        orangeEquip: "Orange Equipment",
+        powerByHex: "装備戦力（星別）",
+        basicStats: "ベース値",
+        enhancement: "強化"
+      }
+    };
+
+    const i18n = {
+      en: {
+        appTitle: "Last Z Guide",
+        nav: { weapon: "Weapon", hq: "HQ", modVehicle: "Mod Vehicle" },
+        tabs: {
+          weapon: [
+            { key: "promoCost", label: "Promotion Cost" },
+            { key: "gun", label: "Gun" },
+            { key: "helmet", label: "Helmet" },
+            { key: "armor", label: "Armor" },
+            { key: "boots", label: "Boots" },
+          ],
+          hq: [],
+          modVehicle: [],
+        },
+        gearNames: { weapon: "Gun", helmet: "Helmet", armor: "Armor", boots: "Boots" },
+        placeholder: { title: "Coming soon", body: "Add your info here." }
+      },
+      ja: {
+        appTitle: "Last Z ガイド",
+        nav: { weapon: "武器", hq: "本部", modVehicle: "改造車" },
+        tabs: {
+          weapon: [
+            { key: "promoCost", label: "昇格コスト" },
+            { key: "gun", label: "機関銃" },
+            { key: "helmet", label: "ヘルメット" },
+            { key: "armor", label: "重装甲羅" },
+            { key: "boots", label: "パワーブーツ" },
+          ],
+          hq: [],
+          modVehicle: [],
+        },
+        gearNames: { weapon: "機関銃", helmet: "ヘルメット", armor: "重装甲羅", boots: "パワーブーツ" },
+        placeholder: { title: "準備中", body: "ここに情報を追加してください。" }
+      },
+    };
+
+    let state = { lang: "en", section: "weapon", tab: "promoCost" };
+
+    const els = {
+      appTitle: document.getElementById("appTitle"),
+      menuBtn: document.getElementById("menuBtn"),
+      backdrop: document.getElementById("backdrop"),
+      tabs: document.getElementById("tabs"),
+      content: document.getElementById("content"),
+      navWeapon: document.getElementById("navWeapon"),
+      navHQ: document.getElementById("navHQ"),
+      navModVehicle: document.getElementById("navModVehicle"),
+      langEn: document.getElementById("langEn"),
+      langJa: document.getElementById("langJa"),
+    };
+
+    function t(){ return i18n[state.lang]; }
+    function tr(key){ return TRANSLATIONS[state.lang][key]; }
+    function fmt(n){
+      if (n == null || Number.isNaN(n)) return "-";
+      return Number.isInteger(n) ? n.toLocaleString() : n.toLocaleString(undefined,{maximumFractionDigits:2});
+    }
+
+    function setLang(lang){
+      state.lang = lang;
+      els.langEn.classList.toggle("active", lang === "en");
+      els.langJa.classList.toggle("active", lang === "ja");
+      renderAll();
+    }
+
+    function setSection(sectionKey){
+      state.section = sectionKey;
+      const tabs = t().tabs[sectionKey] || [];
+      state.tab = tabs[0]?.key || "default";
+      closeSidebar();
+      renderAll();
+    }
+
+    function setTab(tabKey){
+      state.tab = tabKey;
+      renderTabs();
+      renderContent();
+    }
+
+    function renderNav(){
+      els.appTitle.textContent = t().appTitle;
+      els.navWeapon.textContent = `${i18n.ja.nav.weapon} / ${i18n.en.nav.weapon}`;
+      els.navHQ.textContent = `${i18n.ja.nav.hq} / ${i18n.en.nav.hq}`;
+      els.navModVehicle.textContent = `${i18n.ja.nav.modVehicle} / ${i18n.en.nav.modVehicle}`;
+      [els.navWeapon, els.navHQ, els.navModVehicle].forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.section === state.section);
+      });
+    }
+
+    function renderTabs(){
+      els.tabs.innerHTML = "";
+      const tabDefs = t().tabs[state.section] || [];
+      if (tabDefs.length === 0) return;
+
+      tabDefs.forEach(tab => {
+        const b = document.createElement("button");
+        b.className = "tab";
+        b.type = "button";
+        b.textContent = tab.label;
+        b.classList.toggle("active", tab.key === state.tab);
+        b.addEventListener("click", () => setTab(tab.key));
+        els.tabs.appendChild(b);
+      });
+    }
+
+    function renderGearData(container, gearKey){
+      const d = ORANGE_D5_DATA[gearKey];
+      const imageMap = { weapon: 'gun', helmet: 'helmet', armor: 'armor', boots: 'boots' };
+      const imgSrc = GEAR_IMAGES_B64[imageMap[gearKey]];
+
+      let basicRows = '';
+      for (const [key, vals] of Object.entries(d.basic || {})) {
+        let label = '';
+        if (key === 'hero_atk') label = tr('heroAtk');
+        else if (key === 'hero_def') label = tr('heroDef');
+        else if (key === 'hero_atk_pct') label = tr('heroAtkPct');
+        else if (key === 'hero_def_pct') label = tr('heroDefPct');
+        basicRows += `<tr><td>${label}</td>${vals.map(v=>`<td class="num">${fmt(v)}</td>`).join('')}</tr>`;
+      }
+
+      let enhCols = '';
+      let enhRows = '';
+      if (d.enhancement && d.enhancement.length) {
+        const firstRow = d.enhancement[0];
+        const cols = Object.keys(firstRow).filter(k => k !== 'Enhancement Level');
+        enhCols = cols.map(c => {
+          let label = c;
+          if (c === 'Alloy') label = tr('alloy');
+          else if (c === 'Hero ATK') label = tr('heroAtk');
+          else if (c === 'Hero DEF') label = tr('heroDef');
+          else if (c === 'Hero ATK%') label = tr('heroAtkPct');
+          else if (c === 'Hero DEF%') label = tr('heroDefPct');
+          return `<th class="num">${label}</th>`;
+        }).join('');
+        
+        enhRows = d.enhancement.map(r => `
+          <tr>
+            <td class="num">${fmt(r['Enhancement Level'])}</td>
+            ${cols.map(c => `<td class="num">${fmt(r[c])}</td>`).join('')}
+          </tr>
+        `).join('');
+      }
+
+      container.innerHTML = `
+        <div class="gear-hero">
+          <img src="${imgSrc}" alt="${t().gearNames[gearKey]}" onerror="this.style.display='none'">
+          <div class="gear-hero-text">
+            <h3>${t().gearNames[gearKey]}</h3>
+            <p>Orange D5 Equipment Stats</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <section class="card">
+            <div class="card-h">
+              <div class="card-title">${tr('powerByHex')}</div>
+              <span class="badge">${t().gearNames[gearKey]}</span>
+            </div>
+            <div class="card-b">
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>${tr('hexagon')}</th>${d.hex_levels.map(h=>`<th class="num">${h}</th>`).join("")}</tr></thead>
+                  <tbody><tr><td>${tr('power')}</td>${d.power.map(v=>`<td class="num">${fmt(v)}</td>`).join("")}</tr></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-h">
+              <div class="card-title">${tr('basicStats')}</div>
+              <span class="badge">${t().gearNames[gearKey]}</span>
+            </div>
+            <div class="card-b">
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th></th>${d.hex_levels.map(h=>`<th class="num">${h}</th>`).join("")}</tr></thead>
+                  <tbody>${basicRows}</tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-h">
+              <div class="card-title">${tr('enhancement')}</div>
+              <span class="badge">101 ${tr('level')}s</span>
+            </div>
+            <div class="card-b">
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th class="num">${tr('level')}</th>
+                      ${enhCols}
+                    </tr>
+                  </thead>
+                  <tbody>${enhRows}</tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    function renderPromoCost(container){
+      const data = ORANGE_D5_DATA.promotion_cost.filter(r => r.Hexagon != null);
+
+      container.innerHTML = `
+        <h2>${state.lang === 'ja' ? '昇格コスト' : 'Promotion Cost'}</h2>
+        <p>${state.lang === 'ja' ? '全装備共通の昇格コスト表です。' : 'Promotion cost table shared across all equipment.'}</p>
+
+        <div class="grid">
+          <section class="card">
+            <div class="card-h">
+              <div class="card-title">${state.lang === 'ja' ? '昇格コスト（ヘキサゴン別）' : 'Promotion Cost (by Hexagon)'}</div>
+              <span class="badge">${data.length} ${state.lang === 'ja' ? 'ステップ' : 'steps'}</span>
+            </div>
+            <div class="card-b">
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>${tr('hexagon')}</th>
+                      <th class="num">${tr('cents')}</th>
+                      <th class="num">${tr('powerCore')}</th>
+                      <th class="num">${tr('orangeEquip')}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${data.map(r => `
+                      <tr>
+                        <td>${r.Hexagon}</td>
+                        <td class="num">${fmt(r["Cents (M)"])}</td>
+                        <td class="num">${fmt(r["Power Core"])}</td>
+                        <td class="num">${fmt(r["Orange Equipment"])}</td>
+                      </tr>
+                    `).join('')}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    function renderContent(){
+      if (state.section === "weapon") {
+        if (state.tab === "promoCost") {
+          renderPromoCost(els.content);
+        } else {
+          const gearMap = { gun: "weapon", helmet: "helmet", armor: "armor", boots: "boots" };
+          const gearKey = gearMap[state.tab];
+          if (gearKey) renderGearData(els.content, gearKey);
+        }
+        return;
+      }
+
+      const ph = t().placeholder;
+      els.content.innerHTML = `<h2>${ph.title}</h2><p>${ph.body}</p>`;
+    }
+
+    function renderAll(){
+      renderNav();
+      renderTabs();
+      renderContent();
+    }
+
+    function openSidebar(){
+      document.body.classList.add("sidebar-open");
+      els.backdrop.hidden = false;
+    }
+    function closeSidebar(){
+      document.body.classList.remove("sidebar-open");
+      els.backdrop.hidden = true;
+    }
+
+    els.navWeapon.addEventListener("click", () => setSection("weapon"));
+    els.navHQ.addEventListener("click", () => setSection("hq"));
+    els.navModVehicle.addEventListener("click", () => setSection("modVehicle"));
+
+    els.langEn.addEventListener("click", () => setLang("en"));
+    els.langJa.addEventListener("click", () => setLang("ja"));
+
+    els.menuBtn.addEventListener("click", () => {
+      document.body.classList.contains("sidebar-open") ? closeSidebar() : openSidebar();
+    });
+
+    els.backdrop.addEventListener("click", closeSidebar);
+
+    setLang("en");
+    setSection("weapon");
+  </script>
+</body>
+</html>

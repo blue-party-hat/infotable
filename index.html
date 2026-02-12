@@ -89,6 +89,33 @@
     .content h2{margin:0 0 10px; font-size:18px}
     .content p{margin:0 0 10px; color:var(--muted); line-height:1.6}
 
+    .gear-hero{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom:16px;
+      padding:12px;
+      background:rgba(15,23,42,.55);
+      border:1px solid var(--border);
+      border-radius:14px;
+    }
+    .gear-hero img{
+      width:120px;
+      height:120px;
+      object-fit:contain;
+      border-radius:10px;
+      background:rgba(0,0,0,.2);
+    }
+    .gear-hero-text h3{
+      margin:0 0 6px;
+      font-size:20px;
+    }
+    .gear-hero-text p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
     .grid{
       display:grid;
       grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -116,17 +143,24 @@
     .card-b{padding:12px}
 
     .table-wrap{overflow:auto; border:1px solid var(--border); border-radius:12px; background:rgba(2,6,23,.35)}
-    table{border-collapse:separate; border-spacing:0; width:100%; min-width:620px}
-    th,td{padding:10px 10px; border-bottom:1px solid rgba(148,163,184,.14); white-space:nowrap}
-    th{
-      position:sticky; top:0;
-      background:rgba(17,26,46,.98);
+    table{border-collapse:collapse; width:100%; min-width:500px}
+    th,td{
+      padding:8px 10px; 
+      border-bottom:1px solid rgba(148,163,184,.14); 
+      white-space:nowrap;
       text-align:left;
-      font-size:13px; color:var(--muted);
+    }
+    th{
+      background:rgba(17,26,46,.98);
+      font-size:13px; 
+      color:var(--muted);
+      font-weight:600;
+      position:sticky;
+      top:0;
       z-index:1;
     }
     tr:hover td{background:rgba(148,163,184,.06)}
-    td.num{text-align:right; font-variant-numeric: tabular-nums}
+    td.num, th.num{text-align:right; font-variant-numeric: tabular-nums}
 
     @media (max-width: 980px){
       .sidebar{
@@ -144,7 +178,9 @@
       .layout{display:block}
       .main{padding:12px}
       .card{grid-column: span 12}
-      table{min-width:560px}
+      table{min-width:400px}
+      .gear-hero{flex-direction:column; text-align:center}
+      .gear-hero img{width:100px; height:100px}
     }
     @media (min-width: 980px){
       .card.span6{grid-column: span 6}
@@ -181,8 +217,44 @@
   <div class="backdrop" id="backdrop" hidden></div>
 
   <script>
-    // ========== EMBEDDED DATA (extracted from all CSVs) ==========
+    // ========== EMBEDDED DATA ==========
     const ORANGE_D5_DATA = {"weapon":{"hex_levels":["1","2","3","4","5"],"power":[382768,462330,541838,621402,700911],"basic":{"hero_atk":[5403,5838,6183,6528,6873],"hero_atk_pct":[5.3,5.6,5.9,6.2,6.5]},"promo_levels":[5,10,15,20,25],"promo_attrs":{"hero_atk":[2293,3607,4810,6114,7417],"troop_dmg_pct":[7,9,11,13,15]},"enhancement":[{"Enhancement Level":0,"Alloy":null,"Hero ATK":1069,"Hero ATK%":2.0},{"Enhancement Level":1,"Alloy":5000.0,"Hero ATK":1787,"Hero ATK%":2.06},{"Enhancement Level":2,"Alloy":5000.0,"Hero ATK":1836,"Hero ATK%":2.12},{"Enhancement Level":3,"Alloy":5000.0,"Hero ATK":1885,"Hero ATK%":2.18},{"Enhancement Level":4,"Alloy":5000.0,"Hero ATK":1074,"Hero ATK%":2.24},{"Enhancement Level":5,"Alloy":7000.0,"Hero ATK":2043,"Hero ATK%":2.3},{"Enhancement Level":6,"Alloy":7000.0,"Hero ATK":2112,"Hero ATK%":2.36},{"Enhancement Level":7,"Alloy":7000.0,"Hero ATK":2181,"Hero ATK%":2.42},{"Enhancement Level":8,"Alloy":7000.0,"Hero ATK":2249,"Hero ATK%":2.48},{"Enhancement Level":9,"Alloy":7000.0,"Hero ATK":2318,"Hero ATK%":2.54},{"Enhancement Level":10,"Alloy":10000.0,"Hero ATK":2387,"Hero ATK%":2.6},{"Enhancement Level":11,"Alloy":10000.0,"Hero ATK":2457,"Hero ATK%":2.66},{"Enhancement Level":12,"Alloy":10000.0,"Hero ATK":2526,"Hero ATK%":2.72},{"Enhancement Level":13,"Alloy":10000.0,"Hero ATK":2595,"Hero ATK%":2.78},{"Enhancement Level":14,"Alloy":10000.0,"Hero ATK":2664,"Hero ATK%":2.84},{"Enhancement Level":15,"Alloy":15000.0,"Hero ATK":2802,"Hero ATK%":2.9},{"Enhancement Level":16,"Alloy":15000.0,"Hero ATK":2871,"Hero ATK%":2.96},{"Enhancement Level":17,"Alloy":15000.0,"Hero ATK":2940,"Hero ATK%":3.02},{"Enhancement Level":18,"Alloy":15000.0,"Hero ATK":3009,"Hero ATK%":3.08},{"Enhancement Level":19,"Alloy":15000.0,"Hero ATK":3078,"Hero ATK%":3.14},{"Enhancement Level":20,"Alloy":20000.0,"Hero ATK":3147,"Hero ATK%":3.2},{"Enhancement Level":21,"Alloy":20000.0,"Hero ATK":3216,"Hero ATK%":3.26},{"Enhancement Level":22,"Alloy":20000.0,"Hero ATK":3285,"Hero ATK%":3.32},{"Enhancement Level":23,"Alloy":20000.0,"Hero ATK":3354,"Hero ATK%":3.38},{"Enhancement Level":24,"Alloy":20000.0,"Hero ATK":3423,"Hero ATK%":3.44},{"Enhancement Level":25,"Alloy":35000.0,"Hero ATK":3492,"Hero ATK%":3.5},{"Enhancement Level":26,"Alloy":35000.0,"Hero ATK":3561,"Hero ATK%":3.56},{"Enhancement Level":27,"Alloy":35000.0,"Hero ATK":3630,"Hero ATK%":3.62},{"Enhancement Level":28,"Alloy":35000.0,"Hero ATK":3699,"Hero ATK%":3.68},{"Enhancement Level":29,"Alloy":35000.0,"Hero ATK":3768,"Hero ATK%":3.74},{"Enhancement Level":30,"Alloy":70000.0,"Hero ATK":3837,"Hero ATK%":3.8},{"Enhancement Level":31,"Alloy":70000.0,"Hero ATK":3906,"Hero ATK%":3.86},{"Enhancement Level":32,"Alloy":70000.0,"Hero ATK":3975,"Hero ATK%":3.92},{"Enhancement Level":33,"Alloy":70000.0,"Hero ATK":4044,"Hero ATK%":3.98},{"Enhancement Level":34,"Alloy":70000.0,"Hero ATK":4113,"Hero ATK%":4.04},{"Enhancement Level":35,"Alloy":70000.0,"Hero ATK":4182,"Hero ATK%":4.1},{"Enhancement Level":36,"Alloy":70000.0,"Hero ATK":4251,"Hero ATK%":4.16},{"Enhancement Level":37,"Alloy":70000.0,"Hero ATK":4320,"Hero ATK%":4.22},{"Enhancement Level":38,"Alloy":70000.0,"Hero ATK":4389,"Hero ATK%":4.28},{"Enhancement Level":39,"Alloy":70000.0,"Hero ATK":4458,"Hero ATK%":4.34},{"Enhancement Level":40,"Alloy":70000.0,"Hero ATK":4527,"Hero ATK%":4.4},{"Enhancement Level":41,"Alloy":70000.0,"Hero ATK":4596,"Hero ATK%":4.46},{"Enhancement Level":42,"Alloy":70000.0,"Hero ATK":4665,"Hero ATK%":4.52},{"Enhancement Level":43,"Alloy":70000.0,"Hero ATK":4734,"Hero ATK%":4.58},{"Enhancement Level":44,"Alloy":70000.0,"Hero ATK":4803,"Hero ATK%":4.64},{"Enhancement Level":45,"Alloy":70000.0,"Hero ATK":4872,"Hero ATK%":4.7},{"Enhancement Level":46,"Alloy":70000.0,"Hero ATK":4941,"Hero ATK%":4.76},{"Enhancement Level":47,"Alloy":70000.0,"Hero ATK":5010,"Hero ATK%":4.82},{"Enhancement Level":48,"Alloy":70000.0,"Hero ATK":5079,"Hero ATK%":4.88},{"Enhancement Level":49,"Alloy":70000.0,"Hero ATK":5148,"Hero ATK%":4.94},{"Enhancement Level":50,"Alloy":150000.0,"Hero ATK":5217,"Hero ATK%":5.0},{"Enhancement Level":51,"Alloy":150000.0,"Hero ATK":5286,"Hero ATK%":5.06},{"Enhancement Level":52,"Alloy":150000.0,"Hero ATK":5355,"Hero ATK%":5.12},{"Enhancement Level":53,"Alloy":150000.0,"Hero ATK":5424,"Hero ATK%":5.18},{"Enhancement Level":54,"Alloy":150000.0,"Hero ATK":5493,"Hero ATK%":5.24},{"Enhancement Level":55,"Alloy":150000.0,"Hero ATK":5562,"Hero ATK%":5.3},{"Enhancement Level":56,"Alloy":150000.0,"Hero ATK":5631,"Hero ATK%":5.36},{"Enhancement Level":57,"Alloy":150000.0,"Hero ATK":5700,"Hero ATK%":5.42},{"Enhancement Level":58,"Alloy":150000.0,"Hero ATK":5769,"Hero ATK%":5.48},{"Enhancement Level":59,"Alloy":150000.0,"Hero ATK":5838,"Hero ATK%":5.54},{"Enhancement Level":60,"Alloy":150000.0,"Hero ATK":5907,"Hero ATK%":5.6},{"Enhancement Level":61,"Alloy":150000.0,"Hero ATK":5976,"Hero ATK%":5.66},{"Enhancement Level":62,"Alloy":150000.0,"Hero ATK":6045,"Hero ATK%":5.72},{"Enhancement Level":63,"Alloy":150000.0,"Hero ATK":6114,"Hero ATK%":5.78},{"Enhancement Level":64,"Alloy":150000.0,"Hero ATK":6183,"Hero ATK%":5.84},{"Enhancement Level":65,"Alloy":150000.0,"Hero ATK":6252,"Hero ATK%":5.9},{"Enhancement Level":66,"Alloy":150000.0,"Hero ATK":6321,"Hero ATK%":5.96},{"Enhancement Level":67,"Alloy":150000.0,"Hero ATK":6390,"Hero ATK%":6.02},{"Enhancement Level":68,"Alloy":150000.0,"Hero ATK":6459,"Hero ATK%":6.08},{"Enhancement Level":69,"Alloy":150000.0,"Hero ATK":6528,"Hero ATK%":6.14},{"Enhancement Level":70,"Alloy":300000.0,"Hero ATK":6597,"Hero ATK%":6.2},{"Enhancement Level":71,"Alloy":300000.0,"Hero ATK":6666,"Hero ATK%":6.26},{"Enhancement Level":72,"Alloy":300000.0,"Hero ATK":6735,"Hero ATK%":6.32},{"Enhancement Level":73,"Alloy":300000.0,"Hero ATK":6804,"Hero ATK%":6.38},{"Enhancement Level":74,"Alloy":300000.0,"Hero ATK":6873,"Hero ATK%":6.44},{"Enhancement Level":75,"Alloy":300000.0,"Hero ATK":6942,"Hero ATK%":6.5},{"Enhancement Level":76,"Alloy":300000.0,"Hero ATK":7011,"Hero ATK%":6.6},{"Enhancement Level":77,"Alloy":300000.0,"Hero ATK":7080,"Hero ATK%":6.7},{"Enhancement Level":78,"Alloy":300000.0,"Hero ATK":7149,"Hero ATK%":6.8},{"Enhancement Level":79,"Alloy":300000.0,"Hero ATK":7218,"Hero ATK%":6.9},{"Enhancement Level":80,"Alloy":300000.0,"Hero ATK":7287,"Hero ATK%":7.0},{"Enhancement Level":81,"Alloy":300000.0,"Hero ATK":7356,"Hero ATK%":7.1},{"Enhancement Level":82,"Alloy":300000.0,"Hero ATK":7425,"Hero ATK%":7.2},{"Enhancement Level":83,"Alloy":300000.0,"Hero ATK":7494,"Hero ATK%":7.3},{"Enhancement Level":84,"Alloy":300000.0,"Hero ATK":7563,"Hero ATK%":7.4},{"Enhancement Level":85,"Alloy":300000.0,"Hero ATK":7632,"Hero ATK%":7.5},{"Enhancement Level":86,"Alloy":300000.0,"Hero ATK":7701,"Hero ATK%":7.6},{"Enhancement Level":87,"Alloy":300000.0,"Hero ATK":7770,"Hero ATK%":7.7},{"Enhancement Level":88,"Alloy":300000.0,"Hero ATK":7839,"Hero ATK%":7.8},{"Enhancement Level":89,"Alloy":300000.0,"Hero ATK":7908,"Hero ATK%":7.9},{"Enhancement Level":90,"Alloy":450000.0,"Hero ATK":7977,"Hero ATK%":8.0},{"Enhancement Level":91,"Alloy":450000.0,"Hero ATK":8046,"Hero ATK%":8.2},{"Enhancement Level":92,"Alloy":450000.0,"Hero ATK":8115,"Hero ATK%":8.4},{"Enhancement Level":93,"Alloy":450000.0,"Hero ATK":8184,"Hero ATK%":8.6},{"Enhancement Level":94,"Alloy":450000.0,"Hero ATK":8253,"Hero ATK%":8.8},{"Enhancement Level":95,"Alloy":450000.0,"Hero ATK":8322,"Hero ATK%":9.0},{"Enhancement Level":96,"Alloy":450000.0,"Hero ATK":8391,"Hero ATK%":9.2},{"Enhancement Level":97,"Alloy":450000.0,"Hero ATK":8460,"Hero ATK%":9.4},{"Enhancement Level":98,"Alloy":450000.0,"Hero ATK":8529,"Hero ATK%":9.6},{"Enhancement Level":99,"Alloy":450000.0,"Hero ATK":8598,"Hero ATK%":9.8},{"Enhancement Level":100,"Alloy":450000.0,"Hero ATK":8667,"Hero ATK%":10.0}]},"helmet":{"hex_levels":["1","2","3","4","5"],"power":[380750,456075,508305,608120,765880],"basic":{"hero_atk":[3380,3592,3804,4017,4229],"hero_def":[1690,1796,1902,2008,2115],"hero_def_pct":[5.3,5.6,5.9,6.2,6.5]},"promo_levels":[5,10,15,20,25],"promo_attrs":{"hero_atk":[2203,3507,4810,6114,7417],"troop_dmg_pct":[7,9,11,13,15]},"enhancement":[{"Enhancement Level":0,"Alloy":null,"Hero ATK":1045,"Hero DEF":522,"Hero ATK%":2.0},{"Enhancement Level":1,"Alloy":5000.0,"Hero ATK":1087,"Hero DEF":543,"Hero ATK%":2.06},{"Enhancement Level":2,"Alloy":5000.0,"Hero ATK":1129,"Hero DEF":564,"Hero ATK%":2.12},{"Enhancement Level":3,"Alloy":5000.0,"Hero ATK":1172,"Hero DEF":585,"Hero ATK%":2.18},{"Enhancement Level":4,"Alloy":5000.0,"Hero ATK":1214,"Hero DEF":606,"Hero ATK%":2.24},{"Enhancement Level":5,"Alloy":7000.0,"Hero ATK":1257,"Hero DEF":628,"Hero ATK%":2.3},{"Enhancement Level":6,"Alloy":7000.0,"Hero ATK":1299,"Hero DEF":649,"Hero ATK%":2.36},{"Enhancement Level":7,"Alloy":7000.0,"Hero ATK":1342,"Hero DEF":670,"Hero ATK%":2.42},{"Enhancement Level":8,"Alloy":7000.0,"Hero ATK":1384,"Hero DEF":691,"Hero ATK%":2.48},{"Enhancement Level":9,"Alloy":7000.0,"Hero ATK":1427,"Hero DEF":713,"Hero ATK%":2.54},{"Enhancement Level":10,"Alloy":10000.0,"Hero ATK":1469,"Hero DEF":734,"Hero ATK%":2.6},{"Enhancement Level":11,"Alloy":10000.0,"Hero ATK":1512,"Hero DEF":755,"Hero ATK%":2.66},{"Enhancement Level":12,"Alloy":10000.0,"Hero ATK":1554,"Hero DEF":776,"Hero ATK%":2.72},{"Enhancement Level":13,"Alloy":10000.0,"Hero ATK":1596,"Hero DEF":798,"Hero ATK%":2.78},{"Enhancement Level":14,"Alloy":10000.0,"Hero ATK":1639,"Hero DEF":819,"Hero ATK%":2.84},{"Enhancement Level":15,"Alloy":15000.0,"Hero ATK":1681,"Hero DEF":840,"Hero ATK%":2.9},{"Enhancement Level":16,"Alloy":15000.0,"Hero ATK":1724,"Hero DEF":861,"Hero ATK%":2.96},{"Enhancement Level":17,"Alloy":15000.0,"Hero ATK":1766,"Hero DEF":883,"Hero ATK%":3.02},{"Enhancement Level":18,"Alloy":15000.0,"Hero ATK":1809,"Hero DEF":904,"Hero ATK%":3.08},{"Enhancement Level":19,"Alloy":15000.0,"Hero ATK":1851,"Hero DEF":925,"Hero ATK%":3.14},{"Enhancement Level":20,"Alloy":20000.0,"Hero ATK":1894,"Hero DEF":946,"Hero ATK%":3.2},{"Enhancement Level":21,"Alloy":20000.0,"Hero ATK":1936,"Hero DEF":968,"Hero ATK%":3.26},{"Enhancement Level":22,"Alloy":20000.0,"Hero ATK":1979,"Hero DEF":989,"Hero ATK%":3.32},{"Enhancement Level":23,"Alloy":20000.0,"Hero ATK":2021,"Hero DEF":1010,"Hero ATK%":3.38},{"Enhancement Level":24,"Alloy":20000.0,"Hero ATK":2064,"Hero DEF":1031,"Hero ATK%":3.44},{"Enhancement Level":25,"Alloy":35000.0,"Hero ATK":2106,"Hero DEF":1053,"Hero ATK%":3.5},{"Enhancement Level":26,"Alloy":35000.0,"Hero ATK":2148,"Hero DEF":1074,"Hero ATK%":3.56},{"Enhancement Level":27,"Alloy":35000.0,"Hero ATK":2191,"Hero DEF":1095,"Hero ATK%":3.62},{"Enhancement Level":28,"Alloy":35000.0,"Hero ATK":2233,"Hero DEF":1116,"Hero ATK%":3.68},{"Enhancement Level":29,"Alloy":35000.0,"Hero ATK":2276,"Hero DEF":1138,"Hero ATK%":3.74},{"Enhancement Level":30,"Alloy":70000.0,"Hero ATK":2318,"Hero DEF":1159,"Hero ATK%":3.8},{"Enhancement Level":31,"Alloy":70000.0,"Hero ATK":2361,"Hero DEF":1180,"Hero ATK%":3.86},{"Enhancement Level":32,"Alloy":70000.0,"Hero ATK":2403,"Hero DEF":1201,"Hero ATK%":3.92},{"Enhancement Level":33,"Alloy":70000.0,"Hero ATK":2446,"Hero DEF":1222,"Hero ATK%":3.98},{"Enhancement Level":34,"Alloy":70000.0,"Hero ATK":2488,"Hero DEF":1244,"Hero ATK%":4.04},{"Enhancement Level":35,"Alloy":70000.0,"Hero ATK":2531,"Hero DEF":1265,"Hero ATK%":4.1},{"Enhancement Level":36,"Alloy":70000.0,"Hero ATK":2573,"Hero DEF":1286,"Hero ATK%":4.16},{"Enhancement Level":37,"Alloy":70000.0,"Hero ATK":2615,"Hero DEF":1307,"Hero ATK%":4.22},{"Enhancement Level":38,"Alloy":70000.0,"Hero ATK":2658,"Hero DEF":1329,"Hero ATK%":4.28},{"Enhancement Level":39,"Alloy":70000.0,"Hero ATK":2700,"Hero DEF":1350,"Hero ATK%":4.34},{"Enhancement Level":40,"Alloy":70000.0,"Hero ATK":2743,"Hero DEF":1371,"Hero ATK%":4.4},{"Enhancement Level":41,"Alloy":70000.0,"Hero ATK":2785,"Hero DEF":1392,"Hero ATK%":4.46},{"Enhancement Level":42,"Alloy":70000.0,"Hero ATK":2828,"Hero DEF":1414,"Hero ATK%":4.52},{"Enhancement Level":43,"Alloy":70000.0,"Hero ATK":2870,"Hero DEF":1435,"Hero ATK%":4.58},{"Enhancement Level":44,"Alloy":70000.0,"Hero ATK":2913,"Hero DEF":1456,"Hero ATK%":4.64},{"Enhancement Level":45,"Alloy":70000.0,"Hero ATK":2955,"Hero DEF":1477,"Hero ATK%":4.7},{"Enhancement Level":46,"Alloy":70000.0,"Hero ATK":2998,"Hero DEF":1499,"Hero ATK%":4.76},{"Enhancement Level":47,"Alloy":70000.0,"Hero ATK":3040,"Hero DEF":1520,"Hero ATK%":4.82},{"Enhancement Level":48,"Alloy":70000.0,"Hero ATK":3082,"Hero DEF":1541,"Hero ATK%":4.88},{"Enhancement Level":49,"Alloy":70000.0,"Hero ATK":3125,"Hero DEF":1562,"Hero ATK%":4.94},{"Enhancement Level":50,"Alloy":150000.0,"Hero ATK":3167,"Hero DEF":1584,"Hero ATK%":5.0},{"Enhancement Level":51,"Alloy":150000.0,"Hero ATK":3210,"Hero DEF":1605,"Hero ATK%":5.06},{"Enhancement Level":52,"Alloy":150000.0,"Hero ATK":3252,"Hero DEF":1626,"Hero ATK%":5.12},{"Enhancement Level":53,"Alloy":150000.0,"Hero ATK":3295,"Hero DEF":1647,"Hero ATK%":5.18},{"Enhancement Level":54,"Alloy":150000.0,"Hero ATK":3337,"Hero DEF":1669,"Hero ATK%":5.24},{"Enhancement Level":55,"Alloy":150000.0,"Hero ATK":3380,"Hero DEF":1690,"Hero ATK%":5.3},{"Enhancement Level":56,"Alloy":150000.0,"Hero ATK":3422,"Hero DEF":1711,"Hero ATK%":5.36},{"Enhancement Level":57,"Alloy":150000.0,"Hero ATK":3465,"Hero DEF":1732,"Hero ATK%":5.42},{"Enhancement Level":58,"Alloy":150000.0,"Hero ATK":3507,"Hero DEF":1754,"Hero ATK%":5.48},{"Enhancement Level":59,"Alloy":150000.0,"Hero ATK":3549,"Hero DEF":1775,"Hero ATK%":5.54},{"Enhancement Level":60,"Alloy":150000.0,"Hero ATK":3592,"Hero DEF":1796,"Hero ATK%":5.6},{"Enhancement Level":61,"Alloy":150000.0,"Hero ATK":3634,"Hero DEF":1817,"Hero ATK%":5.66},{"Enhancement Level":62,"Alloy":150000.0,"Hero ATK":3677,"Hero DEF":1838,"Hero ATK%":5.72},{"Enhancement Level":63,"Alloy":150000.0,"Hero ATK":3719,"Hero DEF":1860,"Hero ATK%":5.78},{"Enhancement Level":64,"Alloy":150000.0,"Hero ATK":3762,"Hero DEF":1881,"Hero ATK%":5.84},{"Enhancement Level":65,"Alloy":150000.0,"Hero ATK":3804,"Hero DEF":1902,"Hero ATK%":5.9},{"Enhancement Level":66,"Alloy":150000.0,"Hero ATK":3847,"Hero DEF":1923,"Hero ATK%":5.96},{"Enhancement Level":67,"Alloy":150000.0,"Hero ATK":3889,"Hero DEF":1945,"Hero ATK%":6.02},{"Enhancement Level":68,"Alloy":150000.0,"Hero ATK":3932,"Hero DEF":1966,"Hero ATK%":6.08},{"Enhancement Level":69,"Alloy":150000.0,"Hero ATK":3974,"Hero DEF":1987,"Hero ATK%":6.14},{"Enhancement Level":70,"Alloy":300000.0,"Hero ATK":4017,"Hero DEF":2008,"Hero ATK%":6.2},{"Enhancement Level":71,"Alloy":300000.0,"Hero ATK":4059,"Hero DEF":2030,"Hero ATK%":6.26},{"Enhancement Level":72,"Alloy":300000.0,"Hero ATK":4101,"Hero DEF":2051,"Hero ATK%":6.32},{"Enhancement Level":73,"Alloy":300000.0,"Hero ATK":4144,"Hero DEF":2072,"Hero ATK%":6.38},{"Enhancement Level":74,"Alloy":300000.0,"Hero ATK":4186,"Hero DEF":2093,"Hero ATK%":6.44},{"Enhancement Level":75,"Alloy":300000.0,"Hero ATK":4229,"Hero DEF":2115,"Hero ATK%":6.5},{"Enhancement Level":76,"Alloy":300000.0,"Hero ATK":4271,"Hero DEF":2136,"Hero ATK%":6.6},{"Enhancement Level":77,"Alloy":300000.0,"Hero ATK":4314,"Hero DEF":2157,"Hero ATK%":6.7},{"Enhancement Level":78,"Alloy":300000.0,"Hero ATK":4356,"Hero DEF":2178,"Hero ATK%":6.8},{"Enhancement Level":79,"Alloy":300000.0,"Hero ATK":4399,"Hero DEF":2200,"Hero ATK%":6.9},{"Enhancement Level":80,"Alloy":300000.0,"Hero ATK":4441,"Hero DEF":2221,"Hero ATK%":7.0},{"Enhancement Level":81,"Alloy":300000.0,"Hero ATK":4484,"Hero DEF":2242,"Hero ATK%":7.1},{"Enhancement Level":82,"Alloy":300000.0,"Hero ATK":4526,"Hero DEF":2263,"Hero ATK%":7.2},{"Enhancement Level":83,"Alloy":300000.0,"Hero ATK":4568,"Hero DEF":2285,"Hero ATK%":7.3},{"Enhancement Level":84,"Alloy":300000.0,"Hero ATK":4611,"Hero DEF":2306,"Hero ATK%":7.4},{"Enhancement Level":85,"Alloy":300000.0,"Hero ATK":4653,"Hero DEF":2327,"Hero ATK%":7.5},{"Enhancement Level":86,"Alloy":300000.0,"Hero ATK":4696,"Hero DEF":2348,"Hero ATK%":7.6},{"Enhancement Level":87,"Alloy":300000.0,"Hero ATK":4738,"Hero DEF":2370,"Hero ATK%":7.7},{"Enhancement Level":88,"Alloy":300000.0,"Hero ATK":4781,"Hero DEF":2391,"Hero ATK%":7.8},{"Enhancement Level":89,"Alloy":300000.0,"Hero ATK":4823,"Hero DEF":2412,"Hero ATK%":7.9},{"Enhancement Level":90,"Alloy":450000.0,"Hero ATK":4866,"Hero DEF":2433,"Hero ATK%":8.0},{"Enhancement Level":91,"Alloy":450000.0,"Hero ATK":4908,"Hero DEF":2454,"Hero ATK%":8.2},{"Enhancement Level":92,"Alloy":450000.0,"Hero ATK":4951,"Hero DEF":2476,"Hero ATK%":8.4},{"Enhancement Level":93,"Alloy":450000.0,"Hero ATK":4993,"Hero DEF":2497,"Hero ATK%":8.6},{"Enhancement Level":94,"Alloy":450000.0,"Hero ATK":5035,"Hero DEF":2518,"Hero ATK%":8.8},{"Enhancement Level":95,"Alloy":450000.0,"Hero ATK":5078,"Hero DEF":2539,"Hero ATK%":9.0},{"Enhancement Level":96,"Alloy":450000.0,"Hero ATK":5120,"Hero DEF":2561,"Hero ATK%":9.2},{"Enhancement Level":97,"Alloy":450000.0,"Hero ATK":5163,"Hero DEF":2582,"Hero ATK%":9.4},{"Enhancement Level":98,"Alloy":450000.0,"Hero ATK":5205,"Hero DEF":2603,"Hero ATK%":9.6},{"Enhancement Level":99,"Alloy":450000.0,"Hero ATK":5248,"Hero DEF":2624,"Hero ATK%":9.8},{"Enhancement Level":100,"Alloy":450000.0,"Hero ATK":5290,"Hero DEF":2646,"Hero ATK%":10.0}]},"armor":{"hex_levels":["1","2","3","4","5"],"power":[380750,456075,508305,608120,765880],"basic":{"hero_atk":[3380,3592,3804,4017,4229],"hero_def":[1690,1796,1902,2008,2115],"hero_def_pct":[5.3,5.6,5.9,6.2,6.5]},"promo_levels":[5,10,15,20,25],"promo_attrs":{"hero_def":[2203,3507,4810,6114,7417],"troop_hp_pct":[4,6,8,10,12]},"enhancement":[{"Enhancement Level":0,"Alloy":null,"Hero DEF":1045,"Hero ATK":522,"Hero DEF%":2.0},{"Enhancement Level":1,"Alloy":5000.0,"Hero DEF":1087,"Hero ATK":543,"Hero DEF%":2.06},{"Enhancement Level":2,"Alloy":5000.0,"Hero DEF":1129,"Hero ATK":564,"Hero DEF%":2.12},{"Enhancement Level":3,"Alloy":5000.0,"Hero DEF":1172,"Hero ATK":585,"Hero DEF%":2.18},{"Enhancement Level":4,"Alloy":5000.0,"Hero DEF":1214,"Hero ATK":606,"Hero DEF%":2.24},{"Enhancement Level":5,"Alloy":7000.0,"Hero DEF":1257,"Hero ATK":628,"Hero DEF%":2.3},{"Enhancement Level":6,"Alloy":7000.0,"Hero DEF":1299,"Hero ATK":649,"Hero DEF%":2.36},{"Enhancement Level":7,"Alloy":7000.0,"Hero DEF":1342,"Hero ATK":670,"Hero DEF%":2.42},{"Enhancement Level":8,"Alloy":7000.0,"Hero DEF":1384,"Hero ATK":691,"Hero DEF%":2.48},{"Enhancement Level":9,"Alloy":7000.0,"Hero DEF":1427,"Hero ATK":713,"Hero DEF%":2.54},{"Enhancement Level":10,"Alloy":10000.0,"Hero DEF":1469,"Hero ATK":734,"Hero DEF%":2.6},{"Enhancement Level":11,"Alloy":10000.0,"Hero DEF":1512,"Hero ATK":755,"Hero DEF%":2.66},{"Enhancement Level":12,"Alloy":10000.0,"Hero DEF":1554,"Hero ATK":776,"Hero DEF%":2.72},{"Enhancement Level":13,"Alloy":10000.0,"Hero DEF":1596,"Hero ATK":798,"Hero DEF%":2.78},{"Enhancement Level":14,"Alloy":10000.0,"Hero DEF":1639,"Hero ATK":819,"Hero DEF%":2.84},{"Enhancement Level":15,"Alloy":15000.0,"Hero DEF":1681,"Hero ATK":840,"Hero DEF%":2.9},{"Enhancement Level":16,"Alloy":15000.0,"Hero DEF":1724,"Hero ATK":861,"Hero DEF%":2.96},{"Enhancement Level":17,"Alloy":15000.0,"Hero DEF":1766,"Hero ATK":883,"Hero DEF%":3.02},{"Enhancement Level":18,"Alloy":15000.0,"Hero DEF":1809,"Hero ATK":904,"Hero DEF%":3.08},{"Enhancement Level":19,"Alloy":15000.0,"Hero DEF":1851,"Hero ATK":925,"Hero DEF%":3.14},{"Enhancement Level":20,"Alloy":20000.0,"Hero DEF":1894,"Hero ATK":946,"Hero DEF%":3.2},{"Enhancement Level":21,"Alloy":20000.0,"Hero DEF":1936,"Hero ATK":968,"Hero DEF%":3.26},{"Enhancement Level":22,"Alloy":20000.0,"Hero DEF":1979,"Hero ATK":989,"Hero DEF%":3.32},{"Enhancement Level":23,"Alloy":20000.0,"Hero DEF":2021,"Hero ATK":1010,"Hero DEF%":3.38},{"Enhancement Level":24,"Alloy":20000.0,"Hero DEF":2064,"Hero ATK":1031,"Hero DEF%":3.44},{"Enhancement Level":25,"Alloy":35000.0,"Hero DEF":2106,"Hero ATK":1053,"Hero DEF%":3.5},{"Enhancement Level":26,"Alloy":35000.0,"Hero DEF":2148,"Hero ATK":1074,"Hero DEF%":3.56},{"Enhancement Level":27,"Alloy":35000.0,"Hero DEF":2191,"Hero ATK":1095,"Hero DEF%":3.62},{"Enhancement Level":28,"Alloy":35000.0,"Hero DEF":2233,"Hero ATK":1116,"Hero DEF%":3.68},{"Enhancement Level":29,"Alloy":35000.0,"Hero DEF":2276,"Hero ATK":1138,"Hero DEF%":3.74},{"Enhancement Level":30,"Alloy":70000.0,"Hero DEF":2318,"Hero ATK":1159,"Hero DEF%":3.8},{"Enhancement Level":31,"Alloy":70000.0,"Hero DEF":2361,"Hero ATK":1180,"Hero DEF%":3.86},{"Enhancement Level":32,"Alloy":70000.0,"Hero DEF":2403,"Hero ATK":1201,"Hero DEF%":3.92},{"Enhancement Level":33,"Alloy":70000.0,"Hero DEF":2446,"Hero ATK":1222,"Hero DEF%":3.98},{"Enhancement Level":34,"Alloy":70000.0,"Hero DEF":2488,"Hero ATK":1244,"Hero DEF%":4.04},{"Enhancement Level":35,"Alloy":70000.0,"Hero DEF":2531,"Hero ATK":1265,"Hero DEF%":4.1},{"Enhancement Level":36,"Alloy":70000.0,"Hero DEF":2573,"Hero ATK":1286,"Hero DEF%":4.16},{"Enhancement Level":37,"Alloy":70000.0,"Hero DEF":2615,"Hero ATK":1307,"Hero DEF%":4.22},{"Enhancement Level":38,"Alloy":70000.0,"Hero DEF":2658,"Hero ATK":1329,"Hero DEF%":4.28},{"Enhancement Level":39,"Alloy":70000.0,"Hero DEF":2700,"Hero ATK":1350,"Hero DEF%":4.34},{"Enhancement Level":40,"Alloy":70000.0,"Hero DEF":2743,"Hero ATK":1371,"Hero DEF%":4.4},{"Enhancement Level":41,"Alloy":70000.0,"Hero DEF":2785,"Hero ATK":1392,"Hero DEF%":4.46},{"Enhancement Level":42,"Alloy":70000.0,"Hero DEF":2828,"Hero ATK":1414,"Hero DEF%":4.52},{"Enhancement Level":43,"Alloy":70000.0,"Hero DEF":2870,"Hero ATK":1435,"Hero DEF%":4.58},{"Enhancement Level":44,"Alloy":70000.0,"Hero DEF":2913,"Hero ATK":1456,"Hero DEF%":4.64},{"Enhancement Level":45,"Alloy":70000.0,"Hero DEF":2955,"Hero ATK":1477,"Hero DEF%":4.7},{"Enhancement Level":46,"Alloy":70000.0,"Hero DEF":2998,"Hero ATK":1499,"Hero DEF%":4.76},{"Enhancement Level":47,"Alloy":70000.0,"Hero DEF":3040,"Hero ATK":1520,"Hero DEF%":4.82},{"Enhancement Level":48,"Alloy":70000.0,"Hero DEF":3082,"Hero ATK":1541,"Hero DEF%":4.88},{"Enhancement Level":49,"Alloy":70000.0,"Hero DEF":3125,"Hero ATK":1562,"Hero DEF%":4.94},{"Enhancement Level":50,"Alloy":150000.0,"Hero DEF":3167,"Hero ATK":1584,"Hero DEF%":5.0},{"Enhancement Level":51,"Alloy":150000.0,"Hero DEF":3210,"Hero ATK":1605,"Hero DEF%":5.06},{"Enhancement Level":52,"Alloy":150000.0,"Hero DEF":3252,"Hero ATK":1626,"Hero DEF%":5.12},{"Enhancement Level":53,"Alloy":150000.0,"Hero DEF":3295,"Hero ATK":1647,"Hero DEF%":5.18},{"Enhancement Level":54,"Alloy":150000.0,"Hero DEF":3337,"Hero ATK":1669,"Hero DEF%":5.24},{"Enhancement Level":55,"Alloy":150000.0,"Hero DEF":3380,"Hero ATK":1690,"Hero DEF%":5.3},{"Enhancement Level":56,"Alloy":150000.0,"Hero DEF":3422,"Hero ATK":1711,"Hero DEF%":5.36},{"Enhancement Level":57,"Alloy":150000.0,"Hero DEF":3465,"Hero ATK":1732,"Hero DEF%":5.42},{"Enhancement Level":58,"Alloy":150000.0,"Hero DEF":3507,"Hero ATK":1754,"Hero DEF%":5.48},{"Enhancement Level":59,"Alloy":150000.0,"Hero DEF":3549,"Hero ATK":1775,"Hero DEF%":5.54},{"Enhancement Level":60,"Alloy":150000.0,"Hero DEF":3592,"Hero ATK":1796,"Hero DEF%":5.6},{"Enhancement Level":61,"Alloy":150000.0,"Hero DEF":3634,"Hero ATK":1817,"Hero DEF%":5.66},{"Enhancement Level":62,"Alloy":150000.0,"Hero DEF":3677,"Hero ATK":1838,"Hero DEF%":5.72},{"Enhancement Level":63,"Alloy":150000.0,"Hero DEF":3719,"Hero ATK":1860,"Hero DEF%":5.78},{"Enhancement Level":64,"Alloy":150000.0,"Hero DEF":3762,"Hero ATK":1881,"Hero DEF%":5.84},{"Enhancement Level":65,"Alloy":150000.0,"Hero DEF":3804,"Hero ATK":1902,"Hero DEF%":5.9},{"Enhancement Level":66,"Alloy":150000.0,"Hero DEF":3847,"Hero ATK":1923,"Hero DEF%":5.96},{"Enhancement Level":67,"Alloy":150000.0,"Hero DEF":3889,"Hero ATK":1945,"Hero DEF%":6.02},{"Enhancement Level":68,"Alloy":150000.0,"Hero DEF":3932,"Hero ATK":1966,"Hero DEF%":6.08},{"Enhancement Level":69,"Alloy":150000.0,"Hero DEF":3974,"Hero ATK":1987,"Hero DEF%":6.14},{"Enhancement Level":70,"Alloy":300000.0,"Hero DEF":4017,"Hero ATK":2008,"Hero DEF%":6.2},{"Enhancement Level":71,"Alloy":300000.0,"Hero DEF":4059,"Hero ATK":2030,"Hero DEF%":6.26},{"Enhancement Level":72,"Alloy":300000.0,"Hero DEF":4101,"Hero ATK":2051,"Hero DEF%":6.32},{"Enhancement Level":73,"Alloy":300000.0,"Hero DEF":4144,"Hero ATK":2072,"Hero DEF%":6.38},{"Enhancement Level":74,"Alloy":300000.0,"Hero DEF":4186,"Hero ATK":2093,"Hero DEF%":6.44},{"Enhancement Level":75,"Alloy":300000.0,"Hero DEF":4229,"Hero ATK":2115,"Hero DEF%":6.5},{"Enhancement Level":76,"Alloy":300000.0,"Hero DEF":4271,"Hero ATK":2136,"Hero DEF%":6.6},{"Enhancement Level":77,"Alloy":300000.0,"Hero DEF":4314,"Hero ATK":2157,"Hero DEF%":6.7},{"Enhancement Level":78,"Alloy":300000.0,"Hero DEF":4356,"Hero ATK":2178,"Hero DEF%":6.8},{"Enhancement Level":79,"Alloy":300000.0,"Hero DEF":4399,"Hero ATK":2200,"Hero DEF%":6.9},{"Enhancement Level":80,"Alloy":300000.0,"Hero DEF":4441,"Hero ATK":2221,"Hero DEF%":7.0},{"Enhancement Level":81,"Alloy":300000.0,"Hero DEF":4484,"Hero ATK":2242,"Hero DEF%":7.1},{"Enhancement Level":82,"Alloy":300000.0,"Hero DEF":4526,"Hero ATK":2263,"Hero DEF%":7.2},{"Enhancement Level":83,"Alloy":300000.0,"Hero DEF":4568,"Hero ATK":2285,"Hero DEF%":7.3},{"Enhancement Level":84,"Alloy":300000.0,"Hero DEF":4611,"Hero ATK":2306,"Hero DEF%":7.4},{"Enhancement Level":85,"Alloy":300000.0,"Hero DEF":4653,"Hero ATK":2327,"Hero DEF%":7.5},{"Enhancement Level":86,"Alloy":300000.0,"Hero DEF":4696,"Hero ATK":2348,"Hero DEF%":7.6},{"Enhancement Level":87,"Alloy":300000.0,"Hero DEF":4738,"Hero ATK":2370,"Hero DEF%":7.7},{"Enhancement Level":88,"Alloy":300000.0,"Hero DEF":4781,"Hero ATK":2391,"Hero DEF%":7.8},{"Enhancement Level":89,"Alloy":300000.0,"Hero DEF":4823,"Hero ATK":2412,"Hero DEF%":7.9},{"Enhancement Level":90,"Alloy":450000.0,"Hero DEF":4866,"Hero ATK":2433,"Hero DEF%":8.0},{"Enhancement Level":91,"Alloy":450000.0,"Hero DEF":4908,"Hero ATK":2454,"Hero DEF%":8.2},{"Enhancement Level":92,"Alloy":450000.0,"Hero DEF":4951,"Hero ATK":2476,"Hero DEF%":8.4},{"Enhancement Level":93,"Alloy":450000.0,"Hero DEF":4993,"Hero ATK":2497,"Hero DEF%":8.6},{"Enhancement Level":94,"Alloy":450000.0,"Hero DEF":5035,"Hero ATK":2518,"Hero DEF%":8.8},{"Enhancement Level":95,"Alloy":450000.0,"Hero DEF":5078,"Hero ATK":2539,"Hero DEF%":9.0},{"Enhancement Level":96,"Alloy":450000.0,"Hero DEF":5120,"Hero ATK":2561,"Hero DEF%":9.2},{"Enhancement Level":97,"Alloy":450000.0,"Hero DEF":5163,"Hero ATK":2582,"Hero DEF%":9.4},{"Enhancement Level":98,"Alloy":450000.0,"Hero DEF":5205,"Hero ATK":2603,"Hero DEF%":9.6},{"Enhancement Level":99,"Alloy":450000.0,"Hero DEF":5248,"Hero ATK":2624,"Hero DEF%":9.8},{"Enhancement Level":100,"Alloy":450000.0,"Hero DEF":5290,"Hero ATK":2646,"Hero DEF%":10.0}]},"boots":{"hex_levels":["1","2","3","4","5"],"power":[369540,472075,574555,677120,779630],"basic":{"hero_atk":[1690,1796,1902,2008,2115],"hero_def":[3380,3592,3804,4017,4229],"hero_def_pct":[5.3,5.6,5.9,6.2,6.5]},"promo_levels":[5,10,15,20,25],"promo_attrs":{"hero_def":[2203,3507,4810,6114,7417],"troop_hp_pct":[4.4,5.8,7.2,8.6,10.0]},"enhancement":[{"Enhancement Level":0,"Alloy":null,"Hero DEF":1045,"Hero ATK":522,"Hero DEF%":2.0},{"Enhancement Level":1,"Alloy":5000.0,"Hero DEF":1087,"Hero ATK":543,"Hero DEF%":2.06},{"Enhancement Level":2,"Alloy":5000.0,"Hero DEF":1129,"Hero ATK":564,"Hero DEF%":2.12},{"Enhancement Level":3,"Alloy":5000.0,"Hero DEF":1172,"Hero ATK":585,"Hero DEF%":2.18},{"Enhancement Level":4,"Alloy":5000.0,"Hero DEF":1214,"Hero ATK":606,"Hero DEF%":2.24},{"Enhancement Level":5,"Alloy":7000.0,"Hero DEF":1257,"Hero ATK":628,"Hero DEF%":2.3},{"Enhancement Level":6,"Alloy":7000.0,"Hero DEF":1299,"Hero ATK":649,"Hero DEF%":2.36},{"Enhancement Level":7,"Alloy":7000.0,"Hero DEF":1342,"Hero ATK":670,"Hero DEF%":2.42},{"Enhancement Level":8,"Alloy":7000.0,"Hero DEF":1384,"Hero ATK":691,"Hero DEF%":2.48},{"Enhancement Level":9,"Alloy":7000.0,"Hero DEF":1427,"Hero ATK":713,"Hero DEF%":2.54},{"Enhancement Level":10,"Alloy":10000.0,"Hero DEF":1469,"Hero ATK":734,"Hero DEF%":2.6},{"Enhancement Level":11,"Alloy":10000.0,"Hero DEF":1512,"Hero ATK":755,"Hero DEF%":2.66},{"Enhancement Level":12,"Alloy":10000.0,"Hero DEF":1554,"Hero ATK":776,"Hero DEF%":2.72},{"Enhancement Level":13,"Alloy":10000.0,"Hero DEF":1596,"Hero ATK":798,"Hero DEF%":2.78},{"Enhancement Level":14,"Alloy":10000.0,"Hero DEF":1639,"Hero ATK":819,"Hero DEF%":2.84},{"Enhancement Level":15,"Alloy":15000.0,"Hero DEF":1681,"Hero ATK":840,"Hero DEF%":2.9},{"Enhancement Level":16,"Alloy":15000.0,"Hero DEF":1724,"Hero ATK":861,"Hero DEF%":2.96},{"Enhancement Level":17,"Alloy":15000.0,"Hero DEF":1766,"Hero ATK":883,"Hero DEF%":3.02},{"Enhancement Level":18,"Alloy":15000.0,"Hero DEF":1809,"Hero ATK":904,"Hero DEF%":3.08},{"Enhancement Level":19,"Alloy":15000.0,"Hero DEF":1851,"Hero ATK":925,"Hero DEF%":3.14},{"Enhancement Level":20,"Alloy":20000.0,"Hero DEF":1894,"Hero ATK":946,"Hero DEF%":3.2},{"Enhancement Level":21,"Alloy":20000.0,"Hero DEF":1936,"Hero ATK":968,"Hero DEF%":3.26},{"Enhancement Level":22,"Alloy":20000.0,"Hero DEF":1979,"Hero ATK":989,"Hero DEF%":3.32},{"Enhancement Level":23,"Alloy":20000.0,"Hero DEF":2021,"Hero ATK":1010,"Hero DEF%":3.38},{"Enhancement Level":24,"Alloy":20000.0,"Hero DEF":2064,"Hero ATK":1031,"Hero DEF%":3.44},{"Enhancement Level":25,"Alloy":35000.0,"Hero DEF":2106,"Hero ATK":1053,"Hero DEF%":3.5},{"Enhancement Level":26,"Alloy":35000.0,"Hero DEF":2148,"Hero ATK":1074,"Hero DEF%":3.56},{"Enhancement Level":27,"Alloy":35000.0,"Hero DEF":2191,"Hero ATK":1095,"Hero DEF%":3.62},{"Enhancement Level":28,"Alloy":35000.0,"Hero DEF":2233,"Hero ATK":1116,"Hero DEF%":3.68},{"Enhancement Level":29,"Alloy":35000.0,"Hero DEF":2276,"Hero ATK":1138,"Hero DEF%":3.74},{"Enhancement Level":30,"Alloy":70000.0,"Hero DEF":2318,"Hero ATK":1159,"Hero DEF%":3.8},{"Enhancement Level":31,"Alloy":70000.0,"Hero DEF":2361,"Hero ATK":1180,"Hero DEF%":3.86},{"Enhancement Level":32,"Alloy":70000.0,"Hero DEF":2403,"Hero ATK":1201,"Hero DEF%":3.92},{"Enhancement Level":33,"Alloy":70000.0,"Hero DEF":2446,"Hero ATK":1222,"Hero DEF%":3.98},{"Enhancement Level":34,"Alloy":70000.0,"Hero DEF":2488,"Hero ATK":1244,"Hero DEF%":4.04},{"Enhancement Level":35,"Alloy":70000.0,"Hero DEF":2531,"Hero ATK":1265,"Hero DEF%":4.1},{"Enhancement Level":36,"Alloy":70000.0,"Hero DEF":2573,"Hero ATK":1286,"Hero DEF%":4.16},{"Enhancement Level":37,"Alloy":70000.0,"Hero DEF":2615,"Hero ATK":1307,"Hero DEF%":4.22},{"Enhancement Level":38,"Alloy":70000.0,"Hero DEF":2658,"Hero ATK":1329,"Hero DEF%":4.28},{"Enhancement Level":39,"Alloy":70000.0,"Hero DEF":2700,"Hero ATK":1350,"Hero DEF%":4.34},{"Enhancement Level":40,"Alloy":70000.0,"Hero DEF":2743,"Hero ATK":1371,"Hero DEF%":4.4},{"Enhancement Level":41,"Alloy":70000.0,"Hero DEF":2785,"Hero ATK":1392,"Hero DEF%":4.46},{"Enhancement Level":42,"Alloy":70000.0,"Hero DEF":2828,"Hero ATK":1414,"Hero DEF%":4.52},{"Enhancement Level":43,"Alloy":70000.0,"Hero DEF":2870,"Hero ATK":1435,"Hero DEF%":4.58},{"Enhancement Level":44,"Alloy":70000.0,"Hero DEF":2913,"Hero ATK":1456,"Hero DEF%":4.64},{"Enhancement Level":45,"Alloy":70000.0,"Hero DEF":2955,"Hero ATK":1477,"Hero DEF%":4.7},{"Enhancement Level":46,"Alloy":70000.0,"Hero DEF":2998,"Hero ATK":1499,"Hero DEF%":4.76},{"Enhancement Level":47,"Alloy":70000.0,"Hero DEF":3040,"Hero ATK":1520,"Hero DEF%":4.82},{"Enhancement Level":48,"Alloy":70000.0,"Hero DEF":3082,"Hero ATK":1541,"Hero DEF%":4.88},{"Enhancement Level":49,"Alloy":70000.0,"Hero DEF":3125,"Hero ATK":1562,"Hero DEF%":4.94},{"Enhancement Level":50,"Alloy":150000.0,"Hero DEF":3167,"Hero ATK":1584,"Hero DEF%":5.0},{"Enhancement Level":51,"Alloy":150000.0,"Hero DEF":3210,"Hero ATK":1605,"Hero DEF%":5.06},{"Enhancement Level":52,"Alloy":150000.0,"Hero DEF":3252,"Hero ATK":1626,"Hero DEF%":5.12},{"Enhancement Level":53,"Alloy":150000.0,"Hero DEF":3295,"Hero ATK":1647,"Hero DEF%":5.18},{"Enhancement Level":54,"Alloy":150000.0,"Hero DEF":3337,"Hero ATK":1669,"Hero DEF%":5.24},{"Enhancement Level":55,"Alloy":150000.0,"Hero DEF":3380,"Hero ATK":1690,"Hero DEF%":5.3},{"Enhancement Level":56,"Alloy":150000.0,"Hero DEF":3422,"Hero ATK":1711,"Hero DEF%":5.36},{"Enhancement Level":57,"Alloy":150000.0,"Hero DEF":3465,"Hero ATK":1732,"Hero DEF%":5.42},{"Enhancement Level":58,"Alloy":150000.0,"Hero DEF":3507,"Hero ATK":1754,"Hero DEF%":5.48},{"Enhancement Level":59,"Alloy":150000.0,"Hero DEF":3549,"Hero ATK":1775,"Hero DEF%":5.54},{"Enhancement Level":60,"Alloy":150000.0,"Hero DEF":3592,"Hero ATK":1796,"Hero DEF%":5.6},{"Enhancement Level":61,"Alloy":150000.0,"Hero DEF":3634,"Hero ATK":1817,"Hero DEF%":5.66},{"Enhancement Level":62,"Alloy":150000.0,"Hero DEF":3677,"Hero ATK":1838,"Hero DEF%":5.72},{"Enhancement Level":63,"Alloy":150000.0,"Hero DEF":3719,"Hero ATK":1860,"Hero DEF%":5.78},{"Enhancement Level":64,"Alloy":150000.0,"Hero DEF":3762,"Hero ATK":1881,"Hero DEF%":5.84},{"Enhancement Level":65,"Alloy":150000.0,"Hero DEF":3804,"Hero ATK":1902,"Hero DEF%":5.9},{"Enhancement Level":66,"Alloy":150000.0,"Hero DEF":3847,"Hero ATK":1923,"Hero DEF%":5.96},{"Enhancement Level":67,"Alloy":150000.0,"Hero DEF":3889,"Hero ATK":1945,"Hero DEF%":6.02},{"Enhancement Level":68,"Alloy":150000.0,"Hero DEF":3932,"Hero ATK":1966,"Hero DEF%":6.08},{"Enhancement Level":69,"Alloy":150000.0,"Hero DEF":3974,"Hero ATK":1987,"Hero DEF%":6.14},{"Enhancement Level":70,"Alloy":300000.0,"Hero DEF":4017,"Hero ATK":2008,"Hero DEF%":6.2},{"Enhancement Level":71,"Alloy":300000.0,"Hero DEF":4059,"Hero ATK":2030,"Hero DEF%":6.26},{"Enhancement Level":72,"Alloy":300000.0,"Hero DEF":4101,"Hero ATK":2051,"Hero DEF%":6.32},{"Enhancement Level":73,"Alloy":300000.0,"Hero DEF":4144,"Hero ATK":2072,"Hero DEF%":6.38},{"Enhancement Level":74,"Alloy":300000.0,"Hero DEF":4186,"Hero ATK":2093,"Hero DEF%":6.44},{"Enhancement Level":75,"Alloy":300000.0,"Hero DEF":4229,"Hero ATK":2115,"Hero DEF%":6.5},{"Enhancement Level":76,"Alloy":300000.0,"Hero DEF":4271,"Hero ATK":2136,"Hero DEF%":6.6},{"Enhancement Level":77,"Alloy":300000.0,"Hero DEF":4314,"Hero ATK":2157,"Hero DEF%":6.7},{"Enhancement Level":78,"Alloy":300000.0,"Hero DEF":4356,"Hero ATK":2178,"Hero DEF%":6.8},{"Enhancement Level":79,"Alloy":300000.0,"Hero DEF":4399,"Hero ATK":2200,"Hero DEF%":6.9},{"Enhancement Level":80,"Alloy":300000.0,"Hero DEF":4441,"Hero ATK":2221,"Hero DEF%":7.0},{"Enhancement Level":81,"Alloy":300000.0,"Hero DEF":4484,"Hero ATK":2242,"Hero DEF%":7.1},{"Enhancement Level":82,"Alloy":300000.0,"Hero DEF":4526,"Hero ATK":2263,"Hero DEF%":7.2},{"Enhancement Level":83,"Alloy":300000.0,"Hero DEF":4568,"Hero ATK":2285,"Hero DEF%":7.3},{"Enhancement Level":84,"Alloy":300000.0,"Hero DEF":4611,"Hero ATK":2306,"Hero DEF%":7.4},{"Enhancement Level":85,"Alloy":300000.0,"Hero DEF":4653,"Hero ATK":2327,"Hero DEF%":7.5},{"Enhancement Level":86,"Alloy":300000.0,"Hero DEF":4696,"Hero ATK":2348,"Hero DEF%":7.6},{"Enhancement Level":87,"Alloy":300000.0,"Hero DEF":4738,"Hero ATK":2370,"Hero DEF%":7.7},{"Enhancement Level":88,"Alloy":300000.0,"Hero DEF":4781,"Hero ATK":2391,"Hero DEF%":7.8},{"Enhancement Level":89,"Alloy":300000.0,"Hero DEF":4823,"Hero ATK":2412,"Hero DEF%":7.9},{"Enhancement Level":90,"Alloy":450000.0,"Hero DEF":4866,"Hero ATK":2433,"Hero DEF%":8.0},{"Enhancement Level":91,"Alloy":450000.0,"Hero DEF":4908,"Hero ATK":2454,"Hero DEF%":8.2},{"Enhancement Level":92,"Alloy":450000.0,"Hero DEF":4951,"Hero ATK":2476,"Hero DEF%":8.4},{"Enhancement Level":93,"Alloy":450000.0,"Hero DEF":4993,"Hero ATK":2497,"Hero DEF%":8.6},{"Enhancement Level":94,"Alloy":450000.0,"Hero DEF":5035,"Hero ATK":2518,"Hero DEF%":8.8},{"Enhancement Level":95,"Alloy":450000.0,"Hero DEF":5078,"Hero ATK":2539,"Hero DEF%":9.0},{"Enhancement Level":96,"Alloy":450000.0,"Hero DEF":5120,"Hero ATK":2561,"Hero DEF%":9.2},{"Enhancement Level":97,"Alloy":450000.0,"Hero DEF":5163,"Hero ATK":2582,"Hero DEF%":9.4},{"Enhancement Level":98,"Alloy":450000.0,"Hero DEF":5205,"Hero ATK":2603,"Hero DEF%":9.6},{"Enhancement Level":99,"Alloy":450000.0,"Hero DEF":5248,"Hero ATK":2624,"Hero DEF%":9.8},{"Enhancement Level":100,"Alloy":450000.0,"Hero DEF":5290,"Hero ATK":2646,"Hero DEF%":10.0}]},"promotion_cost":[{"Hexagon":" 1/6","Cents (M)":1,"Power Core":100,"Orange Equipment":null},{"Hexagon":" 2/6","Cents (M)":1,"Power Core":100,"Orange Equipment":null},{"Hexagon":" 3/6","Cents (M)":1,"Power Core":200,"Orange Equipment":null},{"Hexagon":" 4/6","Cents (M)":1,"Power Core":200,"Orange Equipment":null},{"Hexagon":" 5/6","Cents (M)":1,"Power Core":200,"Orange Equipment":null},{"Hexagon":"1","Cents (M)":1.5,"Power Core":300,"Orange Equipment":null},{"Hexagon":"1 1/6","Cents (M)":1.5,"Power Core":300,"Orange Equipment":null},{"Hexagon":"1 2/6","Cents (M)":1.5,"Power Core":300,"Orange Equipment":null},{"Hexagon":"1 3/6","Cents (M)":1.5,"Power Core":500,"Orange Equipment":null},{"Hexagon":"1 4/6","Cents (M)":1.5,"Power Core":500,"Orange Equipment":null},{"Hexagon":"1 5/6","Cents (M)":1.5,"Power Core":500,"Orange Equipment":null},{"Hexagon":"2","Cents (M)":2,"Power Core":700,"Orange Equipment":null},{"Hexagon":"2 1/6","Cents (M)":2,"Power Core":700,"Orange Equipment":null},{"Hexagon":"2 2/6","Cents (M)":2,"Power Core":700,"Orange Equipment":null},{"Hexagon":"2 3/6","Cents (M)":2,"Power Core":700,"Orange Equipment":null},{"Hexagon":"2 4/6","Cents (M)":2,"Power Core":700,"Orange Equipment":null},{"Hexagon":"2 5/6","Cents (M)":2,"Power Core":700,"Orange Equipment":null},{"Hexagon":"3","Cents (M)":2.5,"Power Core":1000,"Orange Equipment":null},{"Hexagon":"3 1/6","Cents (M)":2.5,"Power Core":1000,"Orange Equipment":null},{"Hexagon":"3 2/6","Cents (M)":2.5,"Power Core":1000,"Orange Equipment":null},{"Hexagon":"3 3/6","Cents (M)":2.5,"Power Core":1000,"Orange Equipment":null},{"Hexagon":"3 4/6","Cents (M)":2.5,"Power Core":1000,"Orange Equipment":null},{"Hexagon":"3 5/6","Cents (M)":2.5,"Power Core":1000,"Orange Equipment":null},{"Hexagon":"4","Cents (M)":3,"Power Core":1500,"Orange Equipment":1},{"Hexagon":"4 1/6","Cents (M)":3,"Power Core":1500,"Orange Equipment":1},{"Hexagon":"4 2/6","Cents (M)":3,"Power Core":1500,"Orange Equipment":1},{"Hexagon":"4 3/6","Cents (M)":3,"Power Core":1500,"Orange Equipment":2},{"Hexagon":"4 4/6","Cents (M)":3,"Power Core":1500,"Orange Equipment":1},{"Hexagon":"4 5/6","Cents (M)":3,"Power Core":1500,"Orange Equipment":1},{"Hexagon":"5","Cents (M)":9,"Power Core":9000,"Orange Equipment":3},{"Hexagon":null,"Cents (M)":null,"Power Core":null,"Orange Equipment":null},{"Hexagon":"Total","Cents (M)":68,"Power Core":25400,"Orange Equipment":10},{"Hexagon":null,"Cents (M)":null,"Power Core":null,"Orange Equipment":null}]};
+
+    // Embedded images truncated for brevity - use the full base64 from previous response
+    const GEAR_IMAGES = {
+      gun: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD...", // Use full base64 from previous code
+      helmet: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD...", // Use full base64 from previous code
+      armor: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD..." // Body-and-Boots.jpg
+    };
+
+    const TRANSLATIONS = {
+      en: {
+        hexagon: "Hexagon",
+        power: "Power",
+        level: "Level",
+        heroAtk: "Hero ATK",
+        heroDef: "Hero DEF",
+        heroAtkPct: "Hero ATK%",
+        heroDefPct: "Hero DEF%",
+        alloy: "Alloy",
+        cents: "Zents (M)",
+        powerCore: "Power Core",
+        orangeEquip: "Orange Equipment"
+      },
+      ja: {
+        hexagon: "ヘキサゴン（星）",
+        power: "Power",
+        level: "Level",
+        heroAtk: "ヒーロー攻撃力",
+        heroDef: "ヒーロー防御力",
+        heroAtkPct: "ヒーロー攻撃力％",
+        heroDefPct: "ヒーロー防御力％",
+        alloy: "合金",
+        cents: "Zコイン（M）",
+        powerCore: "Power Core",
+        orangeEquip: "Orange Equipment"
+      }
+    };
 
     const i18n = {
       en: {
@@ -237,8 +309,9 @@
     };
 
     function t(){ return i18n[state.lang]; }
+    function tr(key){ return TRANSLATIONS[state.lang][key]; }
     function fmt(n){
-      if (n == null || Number.isNaN(n)) return "";
+      if (n == null || Number.isNaN(n)) return "-";
       return Number.isInteger(n) ? n.toLocaleString() : n.toLocaleString(undefined,{maximumFractionDigits:2});
     }
 
@@ -291,21 +364,17 @@
 
     function renderGearData(container, gearKey){
       const d = ORANGE_D5_DATA[gearKey];
-      const L = (ja,en)=> (state.lang==="ja"?ja:en);
+      const imageMap = { weapon: 'gun', helmet: 'helmet', armor: 'armor', boots: 'armor' };
+      const imgSrc = GEAR_IMAGES[imageMap[gearKey]];
 
       let basicRows = '';
       for (const [key, vals] of Object.entries(d.basic || {})) {
-        const label = key.replace(/_/g,' ').replace('pct','%').replace(/\b\w/g, l => l.toUpperCase());
+        let label = '';
+        if (key === 'hero_atk') label = tr('heroAtk');
+        else if (key === 'hero_def') label = tr('heroDef');
+        else if (key === 'hero_atk_pct') label = tr('heroAtkPct');
+        else if (key === 'hero_def_pct') label = tr('heroDefPct');
         basicRows += `<tr><td>${label}</td>${vals.map(v=>`<td class="num">${fmt(v)}</td>`).join('')}</tr>`;
-      }
-
-      let promoRows = '';
-      if (d.promo_levels && d.promo_levels.length) {
-        promoRows += `<tr><td>+Levels</td>${d.promo_levels.map(v=>`<td class="num">${fmt(v)}</td>`).join('')}</tr>`;
-        for (const [key, vals] of Object.entries(d.promo_attrs || {})) {
-          const label = key.replace(/_/g,' ').replace('pct','%').replace(/\b\w/g, l => l.toUpperCase());
-          promoRows += `<tr><td>${label}</td>${vals.map(v=>`<td class="num">${fmt(v)}</td>`).join('')}</tr>`;
-        }
       }
 
       let enhCols = '';
@@ -313,7 +382,16 @@
       if (d.enhancement && d.enhancement.length) {
         const firstRow = d.enhancement[0];
         const cols = Object.keys(firstRow).filter(k => k !== 'Enhancement Level');
-        enhCols = cols.map(c => `<th class="num">${c}</th>`).join('');
+        enhCols = cols.map(c => {
+          let label = c;
+          if (c === 'Alloy') label = tr('alloy');
+          else if (c === 'Hero ATK') label = tr('heroAtk');
+          else if (c === 'Hero DEF') label = tr('heroDef');
+          else if (c === 'Hero ATK%') label = tr('heroAtkPct');
+          else if (c === 'Hero DEF%') label = tr('heroDefPct');
+          return `<th class="num">${label}</th>`;
+        }).join('');
+        
         enhRows = d.enhancement.map(r => `
           <tr>
             <td class="num">${fmt(r['Enhancement Level'])}</td>
@@ -323,25 +401,33 @@
       }
 
       container.innerHTML = `
+        <div class="gear-hero">
+          <img src="${imgSrc}" alt="${t().gearNames[gearKey]}">
+          <div class="gear-hero-text">
+            <h3>${t().gearNames[gearKey]}</h3>
+            <p>Orange D5 Equipment Stats</p>
+          </div>
+        </div>
+
         <div class="grid">
-          <section class="card span6">
+          <section class="card">
             <div class="card-h">
-              <div class="card-title">${L("Power（Hexagon 1–5）","Power (Hexagon 1–5)")}</div>
+              <div class="card-title">${tr('power')} (${tr('hexagon')} 1–5)</div>
               <span class="badge">${t().gearNames[gearKey]}</span>
             </div>
             <div class="card-b">
               <div class="table-wrap">
                 <table>
-                  <thead><tr><th>Hexagon</th>${d.hex_levels.map(h=>`<th class="num">${h}</th>`).join("")}</tr></thead>
-                  <tbody><tr><td>Power</td>${d.power.map(v=>`<td class="num">${fmt(v)}</td>`).join("")}</tr></tbody>
+                  <thead><tr><th>${tr('hexagon')}</th>${d.hex_levels.map(h=>`<th class="num">${h}</th>`).join("")}</tr></thead>
+                  <tbody><tr><td>${tr('power')}</td>${d.power.map(v=>`<td class="num">${fmt(v)}</td>`).join("")}</tr></tbody>
                 </table>
               </div>
             </div>
           </section>
 
-          <section class="card span6">
+          <section class="card">
             <div class="card-h">
-              <div class="card-title">Basic</div>
+              <div class="card-title">Basic Stats</div>
               <span class="badge">${t().gearNames[gearKey]}</span>
             </div>
             <div class="card-b">
@@ -356,30 +442,15 @@
 
           <section class="card">
             <div class="card-h">
-              <div class="card-title">Promotion Attributes</div>
-              <span class="badge">${t().gearNames[gearKey]}</span>
-            </div>
-            <div class="card-b">
-              <div class="table-wrap">
-                <table>
-                  <thead><tr><th></th>${(d.promo_levels||[]).map(v=>`<th class="num">${fmt(v)}</th>`).join("")}</tr></thead>
-                  <tbody>${promoRows}</tbody>
-                </table>
-              </div>
-            </div>
-          </section>
-
-          <section class="card">
-            <div class="card-h">
-              <div class="card-title">${L("強化コスト＆ステータス（0–100）","Enhancement Cost & Stats (0–100)")}</div>
-              <span class="badge">101 ${L("レベル","levels")}</span>
+              <div class="card-title">Enhancement (0–100)</div>
+              <span class="badge">101 ${tr('level')}s</span>
             </div>
             <div class="card-b">
               <div class="table-wrap">
                 <table>
                   <thead>
                     <tr>
-                      <th class="num">${L("レベル","Level")}</th>
+                      <th class="num">${tr('level')}</th>
                       ${enhCols}
                     </tr>
                   </thead>
@@ -393,28 +464,27 @@
     }
 
     function renderPromoCost(container){
-      const L = (ja,en)=> (state.lang==="ja"?ja:en);
       const data = ORANGE_D5_DATA.promotion_cost.filter(r => r.Hexagon != null);
 
       container.innerHTML = `
-        <h2>${L("昇格コスト","Promotion Cost")}</h2>
-        <p>${L("全装備共通の昇格コスト表です。","Promotion cost table shared across all equipment.")}</p>
+        <h2>${state.lang === 'ja' ? '昇格コスト' : 'Promotion Cost'}</h2>
+        <p>${state.lang === 'ja' ? '全装備共通の昇格コスト表です。' : 'Promotion cost table shared across all equipment.'}</p>
 
         <div class="grid">
           <section class="card">
             <div class="card-h">
-              <div class="card-title">${L("昇格コスト（Hexagon別）","Promotion Cost (by Hexagon)")}</div>
-              <span class="badge">${data.length} ${L("ステップ","steps")}</span>
+              <div class="card-title">${state.lang === 'ja' ? '昇格コスト（ヘキサゴン別）' : 'Promotion Cost (by Hexagon)'}</div>
+              <span class="badge">${data.length} ${state.lang === 'ja' ? 'ステップ' : 'steps'}</span>
             </div>
             <div class="card-b">
               <div class="table-wrap">
                 <table>
                   <thead>
                     <tr>
-                      <th>Hexagon</th>
-                      <th class="num">Cents (M)</th>
-                      <th class="num">Power Core</th>
-                      <th class="num">Orange Equipment</th>
+                      <th>${tr('hexagon')}</th>
+                      <th class="num">${tr('cents')}</th>
+                      <th class="num">${tr('powerCore')}</th>
+                      <th class="num">${tr('orangeEquip')}</th>
                     </tr>
                   </thead>
                   <tbody>

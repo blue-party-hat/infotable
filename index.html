@@ -29,6 +29,9 @@
       background:var(--bg);
       color:var(--text);
       line-height:1.4;
+      position: relative;
+      min-height: 100vh;
+      padding-bottom: 40px;
     }
     .topbar{
       position:sticky; top:0; z-index:50;
@@ -187,6 +190,18 @@
       text-decoration:underline;
     }
 
+    .footer-shoutout{
+      position: fixed;
+      bottom: 8px;
+      right: 16px;
+      font-size: 11px;
+      color: #ff6b9d;
+      font-weight: 500;
+      z-index: 100;
+      text-shadow: 0 1px 3px rgba(0,0,0,.7);
+      pointer-events: none;
+    }
+
     .grid{
       display:grid;
       grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -290,6 +305,11 @@
       .main{padding:10px}
       .card{grid-column: span 12}
       table{min-width:350px}
+      .footer-shoutout{
+        font-size: 10px;
+        right: 8px;
+        bottom: 4px;
+      }
     }
     @media (min-width: 980px){
       .card.span6{grid-column: span 6}
@@ -300,7 +320,7 @@
 <body>
   <header class="topbar">
     <button class="icon-btn" id="menuBtn" aria-label="Open menu">☰</button>
-    <div class="brand" id="appTitle">Last Z Info (Special shout out to S284/B777 RAVENs ♥)</div>
+    <div class="brand" id="appTitle">Last Z Info</div>
     <div class="spacer"></div>
     <div class="lang">
       <button class="lang-btn" id="langEn" type="button">EN</button>
@@ -325,6 +345,7 @@
   </div>
 
   <div class="backdrop" id="backdrop" hidden></div>
+  <div class="footer-shoutout">♥ B777 RAVENs, S284</div>
 
   <script>
     // ========== EMBEDDED DATA ==========
@@ -467,7 +488,7 @@
 
     const i18n = {
       en: {
-        appTitle: "Last Z Info (Special shout out to S284/B777 RAVENs ♥)",
+        appTitle: "Last Z Info",
         nav: { weapon: "Weapon", hq: "HQ", modVehicle: "Mod Vehicle", research: "Research" },
         tabs: {
           weapon: [
@@ -500,7 +521,7 @@
         }
       },
       ja: {
-        appTitle: "Last Z Info (Special shout out to S284/B777 RAVENs ♥)",
+        appTitle: "Last Z Info",
         nav: { weapon: "武器", hq: "本部", modVehicle: "改造車", research: "研究" },
         tabs: {
           weapon: [

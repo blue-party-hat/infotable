@@ -156,6 +156,35 @@
       color:var(--accent-hover);
     }
 
+    .credits-box{
+      background:rgba(42,42,42,.6);
+      border:1px solid var(--border);
+      border-radius:8px;
+      padding:12px 16px;
+      margin-top:20px;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .credits-box h3{
+      margin:0 0 8px 0;
+      font-size:13px;
+      color:var(--accent);
+      font-weight:600;
+    }
+    .credits-box p{
+      margin:0 0 6px 0;
+      line-height:1.6;
+    }
+    .credits-box a{
+      color:var(--accent-hover);
+      text-decoration:none;
+      transition: color .2s;
+    }
+    .credits-box a:hover{
+      color:var(--accent);
+      text-decoration:underline;
+    }
+
     .grid{
       display:grid;
       grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -375,6 +404,12 @@
           title: "HQ Upgrade Cost & Requirements", 
           subtitle: "Resource requirements and building prerequisites for each HQ level.",
           infoNote: "The RSS needed for building is the amount when using Sophia's 3rd skill bonus"
+        },
+        credits: {
+          title: "Data Source",
+          text: "All data provided by DWD. Thank you for this valuable information!",
+          youtube: "YouTube Channel",
+          spreadsheet: "Google Spreadsheet"
         }
       },
       ja: {
@@ -397,6 +432,12 @@
           title: "本部アップグレードコスト", 
           subtitle: "各本部レベルに必要な資源と建築前提条件。",
           infoNote: "必要な資源数はソフィアのスキル3を使った場合の数になります"
+        },
+        credits: {
+          title: "データ提供元",
+          text: "すべてのデータはDWDさんから提供されました。貴重な情報をありがとうございます！",
+          youtube: "YouTubeチャンネル",
+          spreadsheet: "Googleスプレッドシート"
         }
       },
     };
@@ -428,6 +469,22 @@
         return BUILDING_TRANSLATIONS[name];
       }
       return name || "-";
+    }
+
+    function getCreditsHTML() {
+      const credits = t().credits;
+      return `
+        <div class="credits-box">
+          <h3>${credits.title}</h3>
+          <p>${credits.text}</p>
+          <p>
+            <strong>${credits.youtube}:</strong> <a href="https://www.youtube.com/@DWDytchannel" target="_blank" rel="noopener">DWD YouTube</a>
+          </p>
+          <p>
+            <strong>${credits.spreadsheet}:</strong> <a href="https://docs.google.com/spreadsheets/u/0/d/17aDXEUMBsfr9SrlcnFrUjYCoTa2HeAfF/htmlview" target="_blank" rel="noopener">Last Z Data</a>
+          </p>
+        </div>
+      `;
     }
 
     function setLang(lang){
@@ -568,6 +625,8 @@
             </div>
           </section>
         </div>
+
+        ${getCreditsHTML()}
       `;
     }
 
@@ -610,6 +669,8 @@
             </div>
           </section>
         </div>
+
+        ${getCreditsHTML()}
       `;
     }
 
@@ -664,6 +725,8 @@
             </div>
           </section>
         </div>
+
+        ${getCreditsHTML()}
       `;
     }
 

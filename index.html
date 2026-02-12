@@ -29,9 +29,6 @@
       background:var(--bg);
       color:var(--text);
       line-height:1.4;
-      position: relative;
-      min-height: 100vh;
-      padding-bottom: 40px;
     }
     .topbar{
       position:sticky; top:0; z-index:50;
@@ -143,6 +140,7 @@
       border-radius:12px;
       padding:16px;
       box-shadow:0 3px 15px rgba(0,0,0,.4);
+      margin-bottom: 50px;
     }
     .content h2{
       margin:0 0 6px; 
@@ -191,15 +189,11 @@
     }
 
     .footer-shoutout{
-      position: fixed;
-      bottom: 8px;
-      right: 16px;
+      text-align: right;
+      padding: 16px;
       font-size: 11px;
       color: #ff6b9d;
       font-weight: 500;
-      z-index: 100;
-      text-shadow: 0 1px 3px rgba(0,0,0,.7);
-      pointer-events: none;
     }
 
     .grid{
@@ -307,8 +301,7 @@
       table{min-width:350px}
       .footer-shoutout{
         font-size: 10px;
-        right: 8px;
-        bottom: 4px;
+        padding: 12px 8px;
       }
     }
     @media (min-width: 980px){
@@ -341,11 +334,11 @@
     <main class="main">
       <div class="tabs" id="tabs"></div>
       <article class="content" id="content"></article>
+      <div class="footer-shoutout">♥ B777 RAVENs, S284</div>
     </main>
   </div>
 
   <div class="backdrop" id="backdrop" hidden></div>
-  <div class="footer-shoutout">♥ B777 RAVENs, S284</div>
 
   <script>
     // ========== EMBEDDED DATA ==========

@@ -19,6 +19,8 @@
       --silver:#c0c0c0;
       --graphite:#2a2a2a;
       --card-bg:linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+      --vehicle-highlight:rgba(255,193,7,.15);
+      --vehicle-border:rgba(255,193,7,.4);
     }
     *{box-sizing:border-box}
     body{
@@ -255,11 +257,15 @@
       background:rgba(192,192,192,.08);
     }
     tbody tr.vehicle-row{
-      background:rgba(192,192,192,.12);
+      background:var(--vehicle-highlight);
+      border-left:3px solid var(--vehicle-border);
+    }
+    tbody tr.vehicle-row td{
       font-weight:600;
+      color:#ffc107;
     }
     tbody tr.vehicle-row:hover td{
-      background:rgba(192,192,192,.18);
+      background:rgba(255,193,7,.25);
     }
     td.num, th.num{
       text-align:right; 
@@ -333,7 +339,7 @@
       {level:25,wrench:2,sublevel:5,total:10,vehicle:""},
       {level:30,wrench:4,sublevel:5,total:20,vehicle:""},
       {level:35,wrench:4,sublevel:5,total:20,vehicle:""},
-      {level:40,wrench:6,sublevel:5,total:30,vehicle:"FREE"},
+      {level:40,wrench:6,sublevel:5,total:30,vehicle:""},
       {level:45,wrench:8,sublevel:5,total:40,vehicle:"Cheetah"},
       {level:50,wrench:8,sublevel:5,total:40,vehicle:""},
       {level:55,wrench:12,sublevel:5,total:60,vehicle:""},
@@ -375,6 +381,14 @@
       {level:235,wrench:420,sublevel:10,total:4200,vehicle:""},
       {level:240,wrench:480,sublevel:10,total:4800,vehicle:""}
     ];
+
+    const VEHICLE_TRANSLATIONS = {
+      "Cheetah": { en: "Cheetah", ja: "チーター装甲車" },
+      "Hercules": { en: "Hercules", ja: "大力神" },
+      "Destroyer": { en: "Destroyer", ja: "破壊者" },
+      "Destroyer EX": { en: "Destroyer EX", ja: "破壊者EX" },
+      "Conqueror": { en: "Conqueror", ja: "Conqueror" }
+    };
 
     // Building name translations
     const BUILDING_TRANSLATIONS = {
@@ -541,6 +555,14 @@
     function fmt(n){
       if (n == null || Number.isNaN(n) || n === null) return "-";
       return Number.isInteger(n) ? n.toLocaleString() : n.toLocaleString(undefined,{maximumFractionDigits:2});
+    }
+
+    function translateVehicle(name) {
+      if (!name) return "-";
+      if (VEHICLE_TRANSLATIONS[name]) {
+        return VEHICLE_TRANSLATIONS[name][state.lang];
+      }
+      return name;
     }
 
     function translateBuilding(name){
@@ -834,15 +856,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                    ${MOD_VEHICLE_DATA.map(r => `
-                      <tr${r.vehicle ? ' class="vehicle-row"' : ''}>
+                    ${MOD_VEHICLE_DATA.map(r => {
+                      const hasVehicle = r.vehicle && r.vehicle !== "";
+                      return `
+                      <tr${hasVehicle ? ' class="vehicle-row"' : ''}>
                         <td class="num">${r.level}</td>
                         <td class="num">${fmt(r.wrench)}</td>
                         <td class="num">${fmt(r.sublevel)}</td>
                         <td class="num">${fmt(r.total)}</td>
-                        <td>${r.vehicle || "-"}</td>
+                        <td>${translateVehicle(r.vehicle)}</td>
                       </tr>
-                    `).join('')}
+                      `;
+                    }).join('')}
                   </tbody>
                 </table>
               </div>

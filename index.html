@@ -1,1 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Last Z Info</title>
 
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel: #111a2e;
+      --panel2:#0f172a;
+      --text: #e5e7eb;
+      --muted:#94a3b8;
+      --border: rgba(148,163,184,.18);
+      --accent:#60a5fa;
+    }
+
+    *{ box-sizing:border-box; }
+    html, body { height:100%; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding: 10px 12px;
+      background: rgba(17,26,46,.92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+
+    .icon-btn{
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-size: 18px;
+    }
+    .brand{ font-weight: 700; }
+    .spacer{ flex:1; }
+
+    .lang{ display:flex; gap:8px; }
+    .lang-btn{
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      padding: 6px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .lang-btn.active{
+      border-color: rgba(96,165,250,.6);
+      box-shadow: 0 0 0 3px rgba(96,165,250,.15);
+    }
+
+    .layout{
+      display:flex;
+      min-height: calc(100vh - 52px);
+    }
+
+    .sidebar{
+      width: 260px;
+      background: var(--panel2);
+      border-right: 1px solid var(--border);
+      padding: 12px;
+    }
+
+    .nav-item{
+      width:100%;
+      text-align:left;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text);
+      cursor:pointer;
+    }
+    .nav-item:hover{ border-color: var(--border); background: rgba(148,163,184,.06); }
+    .nav-item.active{ border-color: rgba(96,165,250,.45); background: rgba(96,165,250,.10); }
+
+    .main{
+      flex:1;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    .tabs{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+      min-height: 40px;
+      align-items:center;
+    }
+    .tab{
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      padding: 8px 10px;
+      border-radius: 999px;
+      cursor:pointer;
+    }
+    .tab.active{
+      border-color: rgba(96,165,250,.6);
+      background: rgba(96,165,250,.12);
+    }
+
+    .content{
+      background: rgba(17,26,46,.35);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .content h2{ margin: 0 0 10px; font-size: 18px; }
+    .content p{ margin: 0 0 10px; color: var(--muted); line-height: 1.6; }
+    .content .card{
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(15,23,42,.55);
+    }
+
+    /* Mobile */
+    .backdrop{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      z-index: 40;
+    }
+
+    @media (max-width: 900px){
+      .sidebar{
+        position: fixed;
+        top: 52px;
+        left: 0;
+        height: calc(100vh - 52px);
+        transform: translateX(-105%);
+        transition: transform .18s ease;
+        z-index: 45;
+      }
+      body.sidebar-open .sidebar{ transform: translateX(0); }
+      body.sidebar-open .backdrop{ display:block; }
+
+      .layout{ display:block; }
+      .main{ padding: 12px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <button class="icon-btn" id="menuBtn" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
+      ☰
+    </button>
+
+    <div class="brand" id="appTitle">Last Z Info</div>
+
+    <div class="spacer"></div>
+
+    <div class="lang">
+      <button class="lang-btn" id="langEn" type="button">EN</button>
+      <button class="lang-btn" id="langJa" type="button">日本語</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <nav>
+        <button class="nav-item" data-section="weapon" type="button" id="navWeapon"></button>
+        <button class="nav-item" data-section="hq" type="button" id="navHQ"></button>
+        <button class="nav-item" data-section="modVehicle" type="button" id="navModVehicle"></button>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="tabs" id="tabs"></div>
+      <article class="content" id="content"></article>
+    </main>
+  </div>
+
+  <div class="backdrop" id="backdrop" hidden></div>
+
+  <script>
+    const i18n = {
+      en: {
+        appTitle: "Last Z Info",
+        nav: { weapon: "Weapon", hq: "HQ", modVehicle: "Mod Vehicle" },
+        sections: {
+          weapon: { title: "Weapon", tabs: [
+            { key: "orange", label: "Orange Weapon" },
+            { key: "mythic", label: "Mythic Weapon" },
+          ]},
+          hq: { title: "HQ", tabs: [] },
+          modVehicle: { title: "Mod Vehicle", tabs: [] },
+        },
+        content: {
+          weapon: {
+            orange: { heading: "Orange Weapon", body: "Put your Orange Weapon notes here (stats, tests, sources)." },
+            mythic: { heading: "Mythic Weapon", body: "Put your Mythic Weapon notes here." },
+          },
+          hq: { default: { heading: "HQ", body: "Put your HQ information here." } },
+          modVehicle: { default: { heading: "Mod Vehicle", body: "Put your vehicle modification information here." } },
+        },
+      },
+
+      ja: {
+        appTitle: "Last Z 情報",
+        nav: { weapon: "武器", hq: "本部", modVehicle: "改造車" },
+        sections: {
+          weapon: { title: "武器", tabs: [
+            { key: "orange", label: "オレンジ武器" },
+            { key: "mythic", label: "神話武器" },
+          ]},
+          hq: { title: "本部", tabs: [] },
+          modVehicle: { title: "改造車", tabs: [] },
+        },
+        content: {
+          weapon: {
+            orange: { heading: "オレンジ武器", body: "ここにオレンジ武器の情報（ステータス、検証、出典など）を追加してください。" },
+            mythic: { heading: "神話武器", body: "ここに神話武器の情報を追加してください。" },
+          },
+          hq: { default: { heading: "本部", body: "ここに本部の情報を追加してください。" } },
+          modVehicle: { default: { heading: "改造車", body: "ここに改造車の情報を追加してください。" } },
+        },
+      },
+    };
+
+    let state = { lang: "en", section: "weapon", tab: "orange" };
+
+    const els = {
+      appTitle: document.getElementById("appTitle"),
+      menuBtn: document.getElementById("menuBtn"),
+      backdrop: document.getElementById("backdrop"),
+      tabs: document.getElementById("tabs"),
+      content: document.getElementById("content"),
+      navWeapon: document.getElementById("navWeapon"),
+      navHQ: document.getElementById("navHQ"),
+      navModVehicle: document.getElementById("navModVehicle"),
+      langEn: document.getElementById("langEn"),
+      langJa: document.getElementById("langJa"),
+    };
+
+    function t(){ return i18n[state.lang]; }
+
+    function setLang(lang){
+      state.lang = lang;
+      els.langEn.classList.toggle("active", lang === "en");
+      els.langJa.classList.toggle("active", lang === "ja");
+      renderAll();
+    }
+
+    function setSection(sectionKey){
+      state.section = sectionKey;
+      const section = t().sections[sectionKey];
+      const hasTabs = section.tabs && section.tabs.length > 0;
+      state.tab = hasTabs ? section.tabs[0].key : "default";
+      closeSidebar();
+      renderAll();
+    }
+
+    function setTab(tabKey){
+      state.tab = tabKey;
+      renderTabs();
+      renderContent();
+    }
+
+    function renderNav(){
+      els.appTitle.textContent = t().appTitle;
+      // show both labels like "武器 / Weapon" regardless of language
+      els.navWeapon.textContent = `${i18n.ja.nav.weapon} / ${i18n.en.nav.weapon}`;
+      els.navHQ.textContent = `${i18n.ja.nav.hq} / ${i18n.en.nav.hq}`;
+      els.navModVehicle.textContent = `${i18n.ja.nav.modVehicle} / ${i18n.en.nav.modVehicle}`;
+
+      [els.navWeapon, els.navHQ, els.navModVehicle].forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.section === state.section);
+      });
+    }
+
+    function renderTabs(){
+      const section = t().sections[state.section];
+      els.tabs.innerHTML = "";
+
+      if (!section.tabs || section.tabs.length === 0) return;
+
+      section.tabs.forEach(tab => {
+        const b = document.createElement("button");
+        b.className = "tab";
+        b.type = "button";
+        b.textContent = tab.label;
+        b.classList.toggle("active", tab.key === state.tab);
+        b.addEventListener("click", () => setTab(tab.key));
+        els.tabs.appendChild(b);
+      });
+    }
+
+    function renderContent(){
+      const pack = t();
+      const sectionKey = state.section;
+      const tabKey = state.tab;
+
+      const item =
+        (pack.content[sectionKey] && pack.content[sectionKey][tabKey]) ||
+        (pack.content[sectionKey] && pack.content[sectionKey].default);
+
+      els.content.innerHTML = `
+        <h2>${item.heading}</h2>
+        <p>${item.body}</p>
+        <div class="card">
+          <p>Next: add your real data here (tables, bullet lists, images).</p>
+        </div>
+      `;
+    }
+
+    function renderAll(){
+      renderNav();
+      renderTabs();
+      renderContent();
+    }
+
+    function openSidebar(){
+      document.body.classList.add("sidebar-open");
+      els.backdrop.hidden = false;
+      els.menuBtn.setAttribute("aria-expanded", "true");
+    }
+    function closeSidebar(){
+      document.body.classList.remove("sidebar-open");
+      els.backdrop.hidden = true;
+      els.menuBtn.setAttribute("aria-expanded", "false");
+    }
+
+    // events
+    els.navWeapon.addEventListener("click", () => setSection("weapon"));
+    els.navHQ.addEventListener("click", () => setSection("hq"));
+    els.navModVehicle.addEventListener("click", () => setSection("modVehicle"));
+
+    els.langEn.addEventListener("click", () => setLang("en"));
+    els.langJa.addEventListener("click", () => setLang("ja"));
+
+    els.menuBtn.addEventListener("click", () => {
+      document.body.classList.contains("sidebar-open") ? closeSidebar() : openSidebar();
+    });
+    els.backdrop.addEventListener("click", closeSidebar);
+
+    // init
+    setLang("en");
+    setSection("weapon");
+  </script>
+</body>
+</html>

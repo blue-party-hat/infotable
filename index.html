@@ -3,173 +3,218 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Last Z Info</title>
+  <title>Last Z Guide</title>
 
   <style>
     :root{
-      --bg: #0b1220;
-      --panel: #111a2e;
-      --panel2:#0f172a;
-      --text: #e5e7eb;
+      --bg:#0b1220;
+      --panel:#0f172a;
+      --panel2:#111a2e;
+      --text:#e5e7eb;
       --muted:#94a3b8;
-      --border: rgba(148,163,184,.18);
+      --border:rgba(148,163,184,.18);
       --accent:#60a5fa;
+      --good:#34d399;
+      --warn:#fbbf24;
     }
-
-    *{ box-sizing:border-box; }
-    html, body { height:100%; }
+    *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP",sans-serif;
+      background:var(--bg);
+      color:var(--text);
     }
-
+    a{color:inherit}
     .topbar{
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding: 10px 12px;
-      background: rgba(17,26,46,.92);
-      border-bottom: 1px solid var(--border);
+      position:sticky; top:0; z-index:50;
+      display:flex; align-items:center; gap:12px;
+      padding:10px 12px;
+      background:rgba(17,26,46,.92);
+      border-bottom:1px solid var(--border);
       backdrop-filter: blur(8px);
     }
-
     .icon-btn{
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text);
-      padding: 6px 10px;
-      border-radius: 10px;
-      font-size: 18px;
+      border:1px solid var(--border);
+      background:transparent; color:var(--text);
+      padding:6px 10px; border-radius:10px; font-size:18px;
+      cursor:pointer;
     }
-    .brand{ font-weight: 700; }
-    .spacer{ flex:1; }
-
-    .lang{ display:flex; gap:8px; }
+    .brand{font-weight:700}
+    .spacer{flex:1}
+    .lang{display:flex; gap:8px}
     .lang-btn{
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text);
-      padding: 6px 10px;
-      border-radius: 10px;
-      cursor: pointer;
+      border:1px solid var(--border);
+      background:transparent; color:var(--text);
+      padding:6px 10px; border-radius:10px;
+      cursor:pointer;
     }
     .lang-btn.active{
-      border-color: rgba(96,165,250,.6);
-      box-shadow: 0 0 0 3px rgba(96,165,250,.15);
+      border-color:rgba(96,165,250,.6);
+      box-shadow:0 0 0 3px rgba(96,165,250,.15);
     }
 
-    .layout{
-      display:flex;
-      min-height: calc(100vh - 52px);
-    }
-
+    .layout{display:flex; min-height:calc(100vh - 52px)}
     .sidebar{
-      width: 260px;
-      background: var(--panel2);
-      border-right: 1px solid var(--border);
-      padding: 12px;
+      width:260px; padding:12px;
+      background:var(--panel);
+      border-right:1px solid var(--border);
     }
-
     .nav-item{
-      width:100%;
-      text-align:left;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid transparent;
-      background: transparent;
-      color: var(--text);
+      width:100%; text-align:left;
+      padding:10px 12px; border-radius:12px;
+      border:1px solid transparent;
+      background:transparent; color:var(--text);
       cursor:pointer;
     }
-    .nav-item:hover{ border-color: var(--border); background: rgba(148,163,184,.06); }
-    .nav-item.active{ border-color: rgba(96,165,250,.45); background: rgba(96,165,250,.10); }
+    .nav-item:hover{border-color:var(--border); background:rgba(148,163,184,.06)}
+    .nav-item.active{border-color:rgba(96,165,250,.45); background:rgba(96,165,250,.10)}
 
-    .main{
-      flex:1;
-      min-width: 0;
-      padding: 14px;
-    }
-
+    .main{flex:1; min-width:0; padding:14px}
     .tabs{
-      display:flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 12px;
-      min-height: 40px;
-      align-items:center;
+      display:flex; gap:8px; flex-wrap:wrap;
+      padding-bottom:10px; border-bottom:1px solid var(--border);
+      margin-bottom:12px; min-height:40px; align-items:center;
     }
     .tab{
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text);
-      padding: 8px 10px;
-      border-radius: 999px;
+      border:1px solid var(--border);
+      background:transparent; color:var(--text);
+      padding:8px 10px; border-radius:999px;
       cursor:pointer;
     }
-    .tab.active{
-      border-color: rgba(96,165,250,.6);
-      background: rgba(96,165,250,.12);
-    }
+    .tab.active{border-color:rgba(96,165,250,.6); background:rgba(96,165,250,.12)}
 
     .content{
-      background: rgba(17,26,46,.35);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
+      background:rgba(17,26,46,.35);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
     }
-    .content h2{ margin: 0 0 10px; font-size: 18px; }
-    .content p{ margin: 0 0 10px; color: var(--muted); line-height: 1.6; }
-    .content .card{
-      margin-top: 12px;
-      padding: 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: rgba(15,23,42,.55);
+    .content h2{margin:0 0 10px; font-size:18px}
+    .content p{margin:0 0 10px; color:var(--muted); line-height:1.6}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap:12px;
+    }
+    .card{
+      grid-column: span 12;
+      border:1px solid var(--border);
+      background:rgba(15,23,42,.55);
+      border-radius:14px;
+      overflow:hidden;
+    }
+    .card-h{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 12px 0;
+      gap:10px;
+    }
+    .card-title{font-weight:700}
+    .badge{
+      font-size:12px; color:var(--muted);
+      border:1px solid var(--border);
+      padding:4px 8px; border-radius:999px;
+      white-space:nowrap;
+    }
+    .card-b{padding:12px}
+    .img-wrap{
+      border:1px solid var(--border);
+      border-radius:12px;
+      overflow:hidden;
+      background:#000;
+    }
+    .img-wrap img{display:block; width:100%; height:auto}
+    .btn{
+      border:1px solid var(--border);
+      background:transparent;
+      color:var(--text);
+      padding:8px 10px;
+      border-radius:10px;
+      cursor:pointer;
+    }
+    .btn.primary{
+      border-color:rgba(96,165,250,.6);
+      background:rgba(96,165,250,.12);
     }
 
-    /* Mobile */
-    .backdrop{
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.55);
-      z-index: 40;
+    details{
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:rgba(15,23,42,.35);
+      overflow:hidden;
     }
+    summary{
+      cursor:pointer;
+      padding:10px 12px;
+      list-style:none;
+      font-weight:600;
+    }
+    summary::-webkit-details-marker{display:none}
+    .details-body{padding:0 12px 12px}
+    .hint{color:var(--muted); font-size:13px}
 
-    @media (max-width: 900px){
+    .table-wrap{overflow:auto; border:1px solid var(--border); border-radius:12px; background:rgba(2,6,23,.35)}
+    table{border-collapse:separate; border-spacing:0; width:100%; min-width:620px}
+    th,td{padding:10px 10px; border-bottom:1px solid rgba(148,163,184,.14); white-space:nowrap}
+    th{
+      position:sticky; top:0;
+      background:rgba(17,26,46,.98);
+      text-align:left;
+      font-size:13px; color:var(--muted);
+      z-index:1;
+    }
+    tr:hover td{background:rgba(148,163,184,.06)}
+    td.num{text-align:right; font-variant-numeric: tabular-nums}
+    .pill{padding:2px 8px; border-radius:999px; border:1px solid var(--border); font-size:12px; color:var(--muted)}
+    .pill.good{border-color:rgba(52,211,153,.45); color:#a7f3d0}
+    .pill.warn{border-color:rgba(251,191,36,.45); color:#fde68a}
+
+    dialog{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:0;
+      width:min(1000px, calc(100vw - 24px));
+      background:rgba(2,6,23,.88);
+      color:var(--text);
+    }
+    dialog::backdrop{background:rgba(0,0,0,.62)}
+    .dlg-h{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:10px 12px; border-bottom:1px solid var(--border);
+      background:rgba(17,26,46,.75);
+    }
+    .dlg-b{padding:12px}
+    .dlg-b img{width:100%; height:auto; display:block; border-radius:12px; border:1px solid var(--border)}
+
+    @media (max-width: 980px){
       .sidebar{
-        position: fixed;
-        top: 52px;
-        left: 0;
-        height: calc(100vh - 52px);
-        transform: translateX(-105%);
-        transition: transform .18s ease;
-        z-index: 45;
+        position:fixed; top:52px; left:0;
+        height:calc(100vh - 52px);
+        transform:translateX(-105%);
+        transition:transform .18s ease;
+        z-index:45;
       }
-      body.sidebar-open .sidebar{ transform: translateX(0); }
-      body.sidebar-open .backdrop{ display:block; }
-
-      .layout{ display:block; }
-      .main{ padding: 12px; }
+      body.sidebar-open .sidebar{transform:translateX(0)}
+      .backdrop{
+        position:fixed; inset:0; z-index:40;
+        background:rgba(0,0,0,.55);
+      }
+      .layout{display:block}
+      .main{padding:12px}
+      .card{grid-column: span 12}
+      table{min-width:560px}
+    }
+    @media (min-width: 980px){
+      .card.span6{grid-column: span 6}
     }
   </style>
 </head>
 
 <body>
   <header class="topbar">
-    <button class="icon-btn" id="menuBtn" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
-      ☰
-    </button>
-
-    <div class="brand" id="appTitle">Last Z Info</div>
-
+    <button class="icon-btn" id="menuBtn" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">☰</button>
+    <div class="brand" id="appTitle">Last Z Guide</div>
     <div class="spacer"></div>
-
     <div class="lang">
       <button class="lang-btn" id="langEn" type="button">EN</button>
       <button class="lang-btn" id="langJa" type="button">日本語</button>
@@ -193,49 +238,86 @@
 
   <div class="backdrop" id="backdrop" hidden></div>
 
+  <dialog id="imgDialog">
+    <div class="dlg-h">
+      <div id="imgDialogTitle">Image</div>
+      <button class="btn" id="imgDialogClose" type="button">Close</button>
+    </div>
+    <div class="dlg-b">
+      <img id="imgDialogImg" alt="" />
+    </div>
+  </dialog>
+
   <script>
     const i18n = {
       en: {
-        appTitle: "Last Z Info",
+        appTitle: "Last Z Guide",
         nav: { weapon: "Weapon", hq: "HQ", modVehicle: "Mod Vehicle" },
-        sections: {
-          weapon: { title: "Weapon", tabs: [
+        tabs: {
+          weapon: [
             { key: "orange", label: "Orange Weapon" },
             { key: "mythic", label: "Mythic Weapon" },
-          ]},
-          hq: { title: "HQ", tabs: [] },
-          modVehicle: { title: "Mod Vehicle", tabs: [] },
+          ],
+          hq: [],
+          modVehicle: [],
         },
-        content: {
-          weapon: {
-            orange: { heading: "Orange Weapon", body: "Put your Orange Weapon notes here (stats, tests, sources)." },
-            mythic: { heading: "Mythic Weapon", body: "Put your Mythic Weapon notes here." },
-          },
-          hq: { default: { heading: "HQ", body: "Put your HQ information here." } },
-          modVehicle: { default: { heading: "Mod Vehicle", body: "Put your vehicle modification information here." } },
+        orange: {
+          title: "Orange D5 Equipment",
+          subtitle: "Modern view (cards + expandable tables). Tap an image to zoom.",
+          gearCardsTitle: "Gear sheets",
+          enhanceTitle: "Enhancement cost & stats",
+          promoTitle: "Promotion cost",
+          zoom: "Zoom",
+          close: "Close",
+          note: "If you want, I can convert the numbers into real sortable tables next (you’ll paste/copy the table values).",
+          gear: {
+            weapon: "Weapon",
+            helmet: "Helmet",
+            armor: "Armor + Boots",
+            promo: "Promotion Cost",
+          }
         },
+        placeholder: { title: "Coming soon", body: "Add your info here." }
       },
 
       ja: {
-        appTitle: "Last Z 情報",
+        appTitle: "Last Z ガイド",
         nav: { weapon: "武器", hq: "本部", modVehicle: "改造車" },
-        sections: {
-          weapon: { title: "武器", tabs: [
+        tabs: {
+          weapon: [
             { key: "orange", label: "オレンジ武器" },
             { key: "mythic", label: "神話武器" },
-          ]},
-          hq: { title: "本部", tabs: [] },
-          modVehicle: { title: "改造車", tabs: [] },
+          ],
+          hq: [],
+          modVehicle: [],
         },
-        content: {
-          weapon: {
-            orange: { heading: "オレンジ武器", body: "ここにオレンジ武器の情報（ステータス、検証、出典など）を追加してください。" },
-            mythic: { heading: "神話武器", body: "ここに神話武器の情報を追加してください。" },
-          },
-          hq: { default: { heading: "本部", body: "ここに本部の情報を追加してください。" } },
-          modVehicle: { default: { heading: "改造車", body: "ここに改造車の情報を追加してください。" } },
+        orange: {
+          title: "オレンジ D5 装備",
+          subtitle: "見やすい表示（カード＋折りたたみ）。画像タップで拡大できます。",
+          gearCardsTitle: "装備シート",
+          enhanceTitle: "強化コスト＆ステータス",
+          promoTitle: "昇格コスト",
+          zoom: "拡大",
+          close: "閉じる",
+          note: "次は、表の数値を貼り付けてもらえれば、並べ替え・検索できる“本物のテーブル”に変換できます。",
+          gear: {
+            weapon: "武器",
+            helmet: "ヘルメット",
+            armor: "アーマー＋ブーツ",
+            promo: "昇格コスト",
+          }
         },
+        placeholder: { title: "準備中", body: "ここに情報を追加してください。" }
       },
+    };
+
+    const ASSETS = {
+      orangeD5: {
+        weapon: "assets/orange-d5/Gun.jpg",
+        helmet: "assets/orange-d5/Helmet.jpg",
+        armorBoots: "assets/orange-d5/Body-and-Boots.jpg",
+        promoCost: "assets/orange-d5/Promotion-Cost.jpg"
+      }
     };
 
     let state = { lang: "en", section: "weapon", tab: "orange" };
@@ -251,6 +333,10 @@
       navModVehicle: document.getElementById("navModVehicle"),
       langEn: document.getElementById("langEn"),
       langJa: document.getElementById("langJa"),
+      imgDialog: document.getElementById("imgDialog"),
+      imgDialogImg: document.getElementById("imgDialogImg"),
+      imgDialogTitle: document.getElementById("imgDialogTitle"),
+      imgDialogClose: document.getElementById("imgDialogClose"),
     };
 
     function t(){ return i18n[state.lang]; }
@@ -264,9 +350,9 @@
 
     function setSection(sectionKey){
       state.section = sectionKey;
-      const section = t().sections[sectionKey];
-      const hasTabs = section.tabs && section.tabs.length > 0;
-      state.tab = hasTabs ? section.tabs[0].key : "default";
+      // set first tab if any
+      const tabs = t().tabs[sectionKey] || [];
+      state.tab = tabs[0]?.key || "default";
       closeSidebar();
       renderAll();
     }
@@ -279,23 +365,20 @@
 
     function renderNav(){
       els.appTitle.textContent = t().appTitle;
-      // show both labels like "武器 / Weapon" regardless of language
       els.navWeapon.textContent = `${i18n.ja.nav.weapon} / ${i18n.en.nav.weapon}`;
       els.navHQ.textContent = `${i18n.ja.nav.hq} / ${i18n.en.nav.hq}`;
       els.navModVehicle.textContent = `${i18n.ja.nav.modVehicle} / ${i18n.en.nav.modVehicle}`;
-
       [els.navWeapon, els.navHQ, els.navModVehicle].forEach(btn => {
         btn.classList.toggle("active", btn.dataset.section === state.section);
       });
     }
 
     function renderTabs(){
-      const section = t().sections[state.section];
       els.tabs.innerHTML = "";
+      const tabDefs = t().tabs[state.section] || [];
+      if (tabDefs.length === 0) return;
 
-      if (!section.tabs || section.tabs.length === 0) return;
-
-      section.tabs.forEach(tab => {
+      tabDefs.forEach(tab => {
         const b = document.createElement("button");
         b.className = "tab";
         b.type = "button";
@@ -306,39 +389,134 @@
       });
     }
 
-    function renderContent(){
-      const pack = t();
-      const sectionKey = state.section;
-      const tabKey = state.tab;
+    function openImage(title, src){
+      els.imgDialogTitle.textContent = title;
+      els.imgDialogImg.alt = title;
+      els.imgDialogImg.src = src;
+      // <dialog> provides modal behavior natively. [MDN]
+      els.imgDialog.showModal();
+    }
 
-      const item =
-        (pack.content[sectionKey] && pack.content[sectionKey][tabKey]) ||
-        (pack.content[sectionKey] && pack.content[sectionKey].default);
+    function orangeWeaponHtml(){
+      const pack = t().orange;
 
-      els.content.innerHTML = `
-        <h2>${item.heading}</h2>
-        <p>${item.body}</p>
-        <div class="card">
-          <p>Next: add your real data here (tables, bullet lists, images).</p>
+      return `
+        <h2>${pack.title}</h2>
+        <p>${pack.subtitle}</p>
+
+        <div class="grid">
+          <section class="card span6">
+            <div class="card-h">
+              <div class="card-title">${pack.gear.weapon}</div>
+              <button class="btn primary" data-zoom="weapon" type="button">${pack.zoom}</button>
+            </div>
+            <div class="card-b">
+              <div class="img-wrap">
+                <img src="${ASSETS.orangeD5.weapon}" alt="${pack.gear.weapon}" loading="lazy">
+              </div>
+            </div>
+          </section>
+
+          <section class="card span6">
+            <div class="card-h">
+              <div class="card-title">${pack.gear.helmet}</div>
+              <button class="btn primary" data-zoom="helmet" type="button">${pack.zoom}</button>
+            </div>
+            <div class="card-b">
+              <div class="img-wrap">
+                <img src="${ASSETS.orangeD5.helmet}" alt="${pack.gear.helmet}" loading="lazy">
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-h">
+              <div class="card-title">${pack.gear.armor}</div>
+              <button class="btn primary" data-zoom="armorBoots" type="button">${pack.zoom}</button>
+            </div>
+            <div class="card-b">
+              <div class="img-wrap">
+                <img src="${ASSETS.orangeD5.armorBoots}" alt="${pack.gear.armor}" loading="lazy">
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-h">
+              <div class="card-title">${pack.promoTitle}</div>
+              <button class="btn primary" data-zoom="promoCost" type="button">${pack.zoom}</button>
+            </div>
+            <div class="card-b">
+              <div class="img-wrap">
+                <img src="${ASSETS.orangeD5.promoCost}" alt="${pack.promoTitle}" loading="lazy">
+              </div>
+              <p class="hint" style="margin-top:10px">${pack.note}</p>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-h">
+              <div class="card-title">${pack.enhanceTitle}</div>
+              <span class="badge">Next step: turn screenshots into real data</span>
+            </div>
+            <div class="card-b">
+              <details>
+                <summary>Weapon / Helmet / Armor / Boots tables</summary>
+                <div class="details-body">
+                  <p class="hint">
+                    Right now your data is inside images, so it can’t be sorted/filtered.
+                    If you paste the values (CSV/text) for one table, I’ll generate a searchable, sortable table UI.
+                  </p>
+                </div>
+              </details>
+            </div>
+          </section>
         </div>
       `;
+    }
+
+    function renderContent(){
+      if (state.section === "weapon" && state.tab === "orange"){
+        els.content.innerHTML = orangeWeaponHtml();
+
+        els.content.querySelectorAll("[data-zoom]").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const key = btn.getAttribute("data-zoom");
+            const pack = t().orange;
+            const titleMap = {
+              weapon: pack.gear.weapon,
+              helmet: pack.gear.helmet,
+              armorBoots: pack.gear.armor,
+              promoCost: pack.promoTitle
+            };
+            openImage(titleMap[key], ASSETS.orangeD5[key]);
+          });
+        });
+
+        return;
+      }
+
+      // placeholders for other sections
+      const ph = t().placeholder;
+      els.content.innerHTML = `<h2>${ph.title}</h2><p>${ph.body}</p>`;
     }
 
     function renderAll(){
       renderNav();
       renderTabs();
       renderContent();
+      els.imgDialogClose.textContent = t().orange.close;
     }
 
     function openSidebar(){
       document.body.classList.add("sidebar-open");
       els.backdrop.hidden = false;
-      els.menuBtn.setAttribute("aria-expanded", "true");
+      els.menuBtn.setAttribute("aria-expanded","true");
     }
     function closeSidebar(){
       document.body.classList.remove("sidebar-open");
       els.backdrop.hidden = true;
-      els.menuBtn.setAttribute("aria-expanded", "false");
+      els.menuBtn.setAttribute("aria-expanded","false");
     }
 
     // events
@@ -352,7 +530,15 @@
     els.menuBtn.addEventListener("click", () => {
       document.body.classList.contains("sidebar-open") ? closeSidebar() : openSidebar();
     });
+
     els.backdrop.addEventListener("click", closeSidebar);
+    els.imgDialogClose.addEventListener("click", () => els.imgDialog.close());
+    els.imgDialog.addEventListener("click", (e) => {
+      // click outside image to close
+      const rect = els.imgDialog.getBoundingClientRect();
+      const inDialog = (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom);
+      if (!inDialog) els.imgDialog.close();
+    });
 
     // init
     setLang("en");
